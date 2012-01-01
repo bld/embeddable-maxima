@@ -1,9 +1,6 @@
 (in-package #-gcl #:maxima #+GCL "MAXIMA")
 
-#+ecl ($load "lisp-utils/defsystem.lisp")
+;;(pushnew (merge-pathnames "minpack/" *maxima-sharedir*) asdf:*central-registry*)
+(pushnew (concatenate 'string *maxima-sharedir* "/minpack/") asdf:*central-registry*)
 
-(load (merge-pathnames (make-pathname :name "minpack" :type "system")
-		       #-gcl *load-pathname*
-		       #+gcl sys:*load-pathname*))
-
-(mk:oos "minpack-interface" :compile)
+(asdf:load-system :minpack-interface)
