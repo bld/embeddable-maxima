@@ -29,6 +29,7 @@ sin(y)*(10.0+6*cos(x)),
   (cond
     ((stringp x) x)
     ((symbolp x) (print-invert-case (stripdollar x)))
+    ((pathnamep x) (namestring x))
     (t (maybe-invert-string-case (string (implode (strgrind x)))))))
 
 (defmfun $join (x y)
@@ -99,7 +100,7 @@ sin(y)*(10.0+6*cos(x)),
 (defvar *gnuplot-command* "")
 
 
-(defvar $gnuplot_command #+windows"wgnuplot" #-windows"gnuplot"))
+(defvar $gnuplot_command #+windows"wgnuplot" #-windows"gnuplot")
 
 (defun start-gnuplot-process (path)
   #+clisp (setq *gnuplot-stream* (ext:make-pipe-output-stream path))
@@ -1163,9 +1164,9 @@ sin(y)*(10.0+6*cos(x)),
 (defvar $xmaxima_plot_command "xmaxima")
 
 (defun plot-temp-file (file)
-  (if *maxima-tempdir* 
-    (format nil "~a/~a" *maxima-tempdir* file)
-    file))
+  (namestring (if *maxima-tempdir*
+                  (merge-pathnames file *maxima-tempdir*)
+                  file)))
 
 (defun gnuplot-process (&optional file)
   (let ((gnuplot-term ($get_plot_option '$gnuplot_term 2))
@@ -1618,7 +1619,8 @@ sin(y)*(10.0+6*cos(x)),
       ($gnuplot_pipes
        (send-gnuplot-command *gnuplot-command*))
       ($mgnuplot 
-       ($system (concatenate 'string *maxima-plotdir* "/" $mgnuplot_command) 
+       ($system (merge-pathnames $mgnuplot_command
+                                  *maxima-plotdir*) 
                 (format nil " -plot2d ~s -title ~s" file "Fun1"))))
 output-file))
 
@@ -1713,7 +1715,8 @@ output-file))
   (cond ($show_openplot
          (with-open-file (st1 (plot-temp-file "maxout.xmaxima") :direction :output :if-exists :supersede)
            (princ  ans st1))
-         ($system (concatenate 'string *maxima-prefix* #+windows"\\bin\\" #-windows"/bin/" $xmaxima_plot_command)
+         ($system (merge-pathnames $xmaxima_plot_command
+                                    (merge-pathnames "bin/" *maxima-prefix*))
                   (format nil " \"~a\"" (plot-temp-file "maxout.xmaxima"))))
         (t (princ ans) "")))
 
@@ -2098,9 +2101,10 @@ Several functions depending on the two variables v1 and v2:
                (case (getf features :plot-format)
                  ($xmaxima
                   ($system
-                   (concatenate
-                    'string *maxima-prefix* #+windows"\\bin\\" #-windows"/bin/"
-                    $xmaxima_plot_command) 
+                   (merge-pathnames
+                     $xmaxima_plot_command
+                     (merge-pathnames "bin/"
+                                      *maxima-prefix*))
                    (format nil " \"~a\"" file)))
                  ($geomview 
                   ($system $geomview_command
@@ -2109,8 +2113,7 @@ Several functions depending on the two variables v1 and v2:
                   (send-gnuplot-command *gnuplot-command*))
                  ($mgnuplot 
                   ($system
-                   (concatenate
-                    'string *maxima-plotdir* "/" $mgnuplot_command)
+                   (merge-pathnames $mgnuplot_command *maxima-plotdir*)
                    (format nil " -parametric3d \"~a\"" file))))))))
   output-file)
 

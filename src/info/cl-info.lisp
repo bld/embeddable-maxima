@@ -173,8 +173,8 @@
 	 (subdir-bit
 	  (if (null maxima::*maxima-lang-subdir*)
 	      ""
-	      (concatenate 'string "/" maxima::*maxima-lang-subdir*)))
-	 (path+filename (concatenate 'string maxima::*maxima-infodir* subdir-bit "/" filename)))
+	      (namestring maxima::*maxima-lang-subdir*)))
+	 (path+filename (merge-pathnames filename (merge-pathnames subdir-bit maxima::*maxima-infodir*))))
     (with-open-file (in path+filename :direction :input)
       (file-position in byte-offset)
       #+gcl (gcl-read-sequence text in :start 0 :end byte-count)

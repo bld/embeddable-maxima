@@ -565,7 +565,7 @@
     
     (setq *collect-errors* nil)
     (unless $testsuite_files
-      (load (concatenate 'string *maxima-testsdir* "/" "testsuite.lisp")))
+      (load (merge-pathnames "testsuite.lisp" *maxima-testsdir*)))
     (let ((error-break-file)
 	  (testresult)
 	  (tests-to-run (intersect-tests tests))

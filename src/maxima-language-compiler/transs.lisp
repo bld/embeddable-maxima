@@ -274,7 +274,7 @@ translated."
 	     (declare (ignore dow))
 	     (format out-stream (intl:gettext ";;; Translated on: ~D-~2,'0D-~2,'0D ~2,'0D:~2,'0D:~2,'0D~A~%")
 		     year month day hours mins secs (timezone-iso8601-name dst tz))))
-	 (format out-stream (intl:gettext ";;; Maxima version: ~A~%") *autoconf-version*)
+	 (format out-stream (intl:gettext ";;; Maxima version: ~A~%") (asdf:component-version (asdf:find-system '#:maxima)))
 	 (format out-stream (intl:gettext ";;; Lisp implementation: ~A~%") (lisp-implementation-type))
 	 (format out-stream (intl:gettext ";;; Lisp version: ~A~%") (lisp-implementation-version))
 	 (format out-stream "(in-package :maxima)~%")

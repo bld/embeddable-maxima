@@ -14,7 +14,7 @@
   (:default-initargs :type "f"))
 
 (defun fortran-compile (op c &key
-			       (array-slicing t)
+			       (array-slicing nil)
 			       (array-type :array)
 			       (package "SLATEC")
 			       declare-common
