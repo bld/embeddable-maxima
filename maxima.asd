@@ -33,52 +33,50 @@
                 :serial t
                 :components 
                         ((:module package
-                          :pathname ""
                           :components (#-gcl(:file "maxima-package")
                                        #+ecl(:file "ecl-port")
                                        (:file "asdf-autoconf-variables" :depends-on ("maxima-package"))))
                          (:module info
-                          :pathname ""
                           :components ((:file "nregex")
                                        (:file "intl")
                                        (:file "cl-info" :depends-on ("intl"))))
-                         (:module sloop :pathname ""
+                         (:module sloop
                           :components ((:file "sloop")))
-                         (:module declarations :pathname ""
+                         (:module declarations
                           :components ((:file "lmdcls"))) 
-                         (:module destructuring-let :pathname ""
+                         (:module destructuring-let
                           :components ((:file "letmac")))
-                         (:module compatibility-macros1 :pathname ""
+                         (:module compatibility-macros1
                           :components ((:file "generr")
                                        (:file "clmacs")))
-                         (:module compatibility-macros :pathname ""
+                         (:module compatibility-macros
                           :components ((:file "commac"))) 
-                         (:module prerequisites :pathname ""
+                         (:module prerequisites
                           :components ((:file "mormac") 
                                        (:file "compat")))
-                         (:module getopt :pathname ""
+                         (:module getopt
                           :components ((:file "getopt")))
-                         (:module command-line :pathname ""
+                         (:module command-line
                           :depends-on (getopt)
                           :components ((:file "command-line")))
-                         (:module fundamental-macros :pathname ""
+                         (:module fundamental-macros
                           :components ((:file "defopt") 
                                        (:file "defcal") 
                                        (:file "maxmac")))
-                         (:module utility-macros :pathname ""
+                         (:module utility-macros
                           :components ((:file "mopers") 
                                        (:file "mforma")))
-                         (:module other-macros :pathname ""
+                         (:module other-macros
                           :components ((:file "mrgmac") 
                                        (:file "rzmac")    
                                        (:file "strmac") 
                                        (:file "displm")))
-                         (:module rat-macros :pathname ""
+                         (:module rat-macros
                           :components ((:file "ratmac") 
                                        (:file "mhayat")))
                          #+gcl (:file "optimize")		; jfa check this
 
-                         (:module utilities :pathname ""
+                         (:module utilities
                           :depends-on (utility-macros)
                           :components ((:file "opers")
                                        (:file "utils") 
@@ -90,10 +88,10 @@
                                        (:file "outmis") 
                                        (:file "ar")))
 
-                         (:module commands :pathname ""
+                         (:module commands
                           :components ((:file "comm")
                                        (:file "comm2")))
-                         (:module evaluator :pathname ""
+                         (:module evaluator
                           :components ((:file "mlisp") 
                                        (:file "mmacro") 
                                        (:file "buildq")))
@@ -372,7 +370,7 @@
                                              (:file "quadpack")
                                              )
                                             )))
-                         (:module simplification :pathname ""
+                         (:module simplification 
                           :components ((:file "simp") 
                                        (:file "float") 
                                        (:file "csimp") 
@@ -380,27 +378,27 @@
                                        (:file "zero")
                                        (:file "logarc") 
                                        (:file "rpart")))
-                         (:module numeric-bigfloat :pathname ""
+                         (:module numeric-bigfloat 
                           :components ((:file "numeric")))
-                         (:module server :pathname ""
+                         (:module server 
                           :components ((:file "server")))
-                         (:module i-o :pathname ""
+                         (:module i-o 
                           :depends-on (compatibility-macros)
                           :components ((:file "macsys") 
                                        (:file "mload") 
                                        (:file "suprv1")
                                        (:file "dskfn")))
-                         (:module factoring :pathname ""
+                         (:module factoring 
                           :components ((:file "lesfac") 
                                        (:file "factor") 
                                        (:file "algfac") 
                                        (:file "nalgfa") 
                                        (:file "ufact") 
                                        (:file "result")))
-                         (:module ifactor :pathname ""
+                         (:module ifactor 
                           :components ((:file "ifactor")))
 
-                         (:module rational-functions :pathname ""
+                         (:module rational-functions 
                           :components ((:file "rat3a") 
                                        (:file "rat3b") 
                                        (:file "rat3d") 
@@ -410,9 +408,9 @@
                                        (:file "nrat4") 
                                        (:file "ratout")))
 
-                         (:module maxima-language-compiler-macros :pathname ""
+                         (:module maxima-language-compiler-macros 
                           :components ((:file "transm")))
-                         (:module maxima-language-compiler :pathname ""
+                         (:module maxima-language-compiler 
                           :components ((:file "transl") 
                                        (:file "transs") 
                                        (:file "trans1") 
@@ -434,12 +432,12 @@
                                        (:file "mdefun"))
                           :depends-on (maxima-language-compiler-macros))
 
-                         (:module trigonometry :pathname ""
+                         (:module trigonometry 
                           :components ((:file "trigi") 
                                        (:file "trigo") 
                                        (:file "trgred")))
 
-                         (:module numerical-functions :pathname ""
+                         (:module numerical-functions 
                           :depends-on (trigonometry)
                           :components ((:file "bessel")
                                        (:file "ellipt")
@@ -448,65 +446,65 @@
                                        (:file "plasma")
                                        (:file "intpol")))
 
-                         (:module reader :pathname ""
+                         (:module reader 
                           :depends-on (compatibility-macros)
                           :components ((:file "nparse")))
 
-                         (:module display :pathname ""
+                         (:module display 
                           :components ((:file "displa") 
                                        (:file "nforma") 
                                        (:file "ldisp") 
                                        (:file "grind")))
 
-                         (:module gcd :pathname ""
+                         (:module gcd 
                           :components ((:file "spgcd")
                                        (:file "ezgcd")))
-                         (:module documentation :pathname ""
+                         (:module documentation 
                           :components ((:file "option")
                                        (:file "macdes")))
-                         (:module algebraic-database :pathname ""
+                         (:module algebraic-database 
                           :components ((:file "inmis") 
                                        (:file "db") 
                                        (:file "compar") 
                                        (:file "askp"))) ;does this belong here?
-                         (:module integration :pathname ""
+                         (:module integration 
                           :components ((:file "sinint") 
                                        (:file "sin") 
                                        (:file "risch")))
-                         (:module taylor-series :pathname ""
+                         (:module taylor-series 
                           :depends-on (rat-macros)
                           :components ((:file "hayat")))
-                         (:module definite-integration :pathname ""
+                         (:module definite-integration 
                           :components ((:file "defint") 
                                        (:file "residu")))
-                         (:module special-functions :pathname ""
+                         (:module special-functions 
                           :components ((:file "specfn")))
-                         (:module matrix-algebra :pathname ""
+                         (:module matrix-algebra 
                           :components ((:file "mat") 
                                        (:file "linnew")
                                        (:file "matrix")))
-                         (:module determinants :pathname ""
+                         (:module determinants 
                           :components ((:file "sprdet") 
                                        (:file "newinv") 
                                        (:file "newdet")))
-                         (:module pattern-matching :pathname ""
+                         (:module pattern-matching 
                           :components ((:file "schatc") 
                                        (:file "matcom") 
                                        (:file "matrun") 
                                        (:file "nisimp")))
-                         (:module limits :pathname ""
+                         (:module limits 
                           :components ((:file "tlimit") 
                                        (:file "limit")))
-                         (:module solve :pathname ""
+                         (:module solve 
                           :components ((:file "solve") 
                                        (:file "psolve") 
                                        (:file "algsys") 
                                        (:file "polyrz") 
                                        (:file "cpoly")))
-                         (:module debugging :pathname ""
+                         (:module debugging 
                           :components ((:file "mtrace")
                                        (:file "mdebug")))
-                         (:module miscellaneous :pathname ""
+                         (:module miscellaneous 
                           :components ((:file "scs") 
                                        (:file "asum") 
                                        (:file "fortra") 
@@ -527,11 +525,11 @@
                                        (:file "expintegral")
                                        (:file "gamma")
                                        (:file "mstuff")))
-                         (:module poisson-series :pathname ""
+                         (:module poisson-series 
                           :components ((:file "ratpoi")
                                        (:file "pois2") 
                                        (:file "pois3")))
-                         (:module translated-packages :pathname ""
+                         (:module translated-packages 
                           :depends-on ("maxima-language-compiler-macros")
                           :components
                                   ((:file "desoln")
@@ -542,12 +540,11 @@
                                    (:file "todd-coxeter")
                                    (:file "mactex")
                                    (:file "plot")))
-                         (:module graphics-drivers :pathname ""
+                         (:module graphics-drivers 
                           :components ((:file "gnuplot_def")
                                        (:file "xmaxima_def")))
 
-                         (:module final :pathname ""
-                                  ;; These are not compiled, for whatever reason
+                         (:module final 
                           :components ((:file "autol")
                                        (:file "max_ext")
                                        (:file "asdf-share-subdirs")
