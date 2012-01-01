@@ -18,12 +18,6 @@
   (:export #:cl-option #:make-cl-option #:list-cl-options #:process-args
 	   #:get-application-args))
 
-;; Kevin Rosenberg's getopt package
-(defpackage getopt
-  (:use :cl)
-  (:export #:match-unique-abbreviation
-	   #:getopt))
-
 (defpackage :maxima
   (:use :common-lisp :command-line)
   ;; Gcl has DEFINE-COMPILER-MACRO but it's in the SYSTEM package.  So

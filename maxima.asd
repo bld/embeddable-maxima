@@ -25,7 +25,7 @@
   :licence "GPL" 
   :version "5.26.0"
   :serial t
-  :depends-on (#:cl-fad #:f2cl #:slatec #:quadpack)
+  :depends-on (#:cl-fad #:f2cl #:slatec #:quadpack #:getopt)
   :components ((:module src
                 :serial t
                 :components 
@@ -49,10 +49,7 @@
                          (:module prerequisites
                           :components ((:file "mormac") 
                                        (:file "compat")))
-                         (:module getopt
-                          :components ((:file "getopt")))
                          (:module command-line
-                          :depends-on (getopt)
                           :components ((:file "command-line")))
                          (:module fundamental-macros
                           :components ((:file "defopt") 
