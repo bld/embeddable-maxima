@@ -66,7 +66,7 @@
                          (:module rat-macros
                           :components ((:file "ratmac") 
                                        (:file "mhayat")))
-                         #+gcl (:file "optimize")		; jfa check this
+                         ;;#+gcl (:file "optimize")		; jfa check this
 
                          (:module utilities
                           :depends-on (utility-macros)
