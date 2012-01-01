@@ -53,7 +53,7 @@
 (in-package :maxima)
 
 (defvar *old-tex-atom* #'tex-atom)
-(defvar *windows-OS* (string= *autoconf-win32* "true"))
+(defvar *windows-OS* #+windows t #-windows nil)
 (defmvar $wxplot_size '((mlist simp) 400 250))
 (defmvar $wxplot_old_gnuplot nil)
 (defvar *image-counter* 0)

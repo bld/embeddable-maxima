@@ -180,9 +180,7 @@ When one changes, the other does too."
 (defun default-userdir ()
   (let ((home-env (maxima-getenv "HOME"))
 	(base-dir "")
-	(maxima-dir (if (string= *autoconf-win32* "true")
-			"maxima"
-			".maxima")))
+	(maxima-dir #+windows "maxima" #-windows ".maxima"))
     (setf base-dir
 	  (if (and home-env (string/= home-env ""))
 	      ;; use home-env...
@@ -192,9 +190,7 @@ When one changes, the other does too."
 		  "c:\\user\\"
 		  home-env)
 	      ;; we have to make a guess
-	      (if (string= *autoconf-win32* "true")
-		  "c:\\user\\"
-		  "/tmp")))
+              #+windows "c:\\user\\" #-windows "/tmp"))
     (combine-path (maxima-parse-dirstring base-dir) maxima-dir)))
 
 (defun default-tempdir ()
@@ -205,9 +201,7 @@ When one changes, the other does too."
 	      (if (string= home-env "c:\\")
 		  "c:\\user\\"
 		  home-env)
-	      (if (string= *autoconf-win32* "true")
-		  "c:\\user\\"
-		  "/tmp")))
+              #+windows "c:\\user\\" #-windows "/tmp"))
     (maxima-parse-dirstring base-dir)))
 
 (defun set-locale-subdir ()
@@ -284,14 +278,13 @@ When one changes, the other does too."
                        "/binary-" *maxima-lispname*))
 
     ; On Windows Vista gcc requires explicit include
-    #+gcl
-    (when (string= *autoconf-win32* "true")
+    #+(and gcl windows)
       (let ((mingw-gccver (maxima-getenv "mingw_gccver")))
 	(when mingw-gccver
 	  (setq compiler::*cc*
 		(concatenate 'string compiler::*cc* " -I\"" *maxima-prefix* "\\include\""
 			     " -I\"" *maxima-prefix* "\\lib\\gcc-lib\\mingw32\\"
-			     mingw-gccver "\\include\" ")))))
+			     mingw-gccver "\\include\" "))))
 
     ; Assign initial values for Maxima shadow variables
     (setq $maxima_userdir *maxima-userdir*)

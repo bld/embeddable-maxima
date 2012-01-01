@@ -55,10 +55,7 @@ sin(y)*(10.0+6*cos(x)),
     ((mlist) $transform_xy nil)
     ((mlist) $run_viewer t)
     ((mlist) $axes t)
-    ((mlist) $plot_format
-     ,(if (string= *autoconf-win32* "true")
-          '$gnuplot
-          '$gnuplot_pipes))
+    ((mlist) $plot_format #+windows $gnuplot #-windows $gnuplot_pipes)
     ((mlist) $color $blue $red $green $magenta
      $black $cyan)
     ((mlist) $point_type $bullet $circle $plus $times
@@ -78,7 +75,7 @@ sin(y)*(10.0+6*cos(x)),
     ;; adaptive-plotting will do.
     ((mlist) $adapt_depth 5)
     ((mlist) $gnuplot_preamble "")
-    ((mlist) $gnuplot_default_term_command ,(if (string= *autoconf-win32* "true") "set term windows" "set term pop"))
+    ((mlist) $gnuplot_default_term_command #+windows"set term windows" #-windows"set term pop")
     ((mlist) $gnuplot_dumb_term_command
      "set term dumb 79 22")
     ((mlist) $gnuplot_ps_term_command
@@ -101,9 +98,8 @@ sin(y)*(10.0+6*cos(x)),
 (defvar *gnuplot-stream* nil)
 (defvar *gnuplot-command* "")
 
-(defvar $gnuplot_command (if (string= *autoconf-win32* "true")
-                             "wgnuplot"
-                             "gnuplot"))
+
+(defvar $gnuplot_command #+windows"wgnuplot" #-windows"gnuplot"))
 
 (defun start-gnuplot-process (path)
   #+clisp (setq *gnuplot-stream* (ext:make-pipe-output-stream path))
@@ -239,10 +235,8 @@ sin(y)*(10.0+6*cos(x)),
           ($plot_format
            (case (third value) ($openmath (setf (third value) '$xmaxima)))
            (unless (member (third value)
-                       (if (string= *autoconf-win32* "true")
-                           '($geomview $gnuplot $mgnuplot $xmaxima)
-                           '($geomview $gnuplot $gnuplot_pipes
-                             $mgnuplot $xmaxima)))
+                           #+windows'($geomview $gnuplot $mgnuplot $xmaxima)
+                           #-windows'($geomview $gnuplot $gnuplot_pipes  $mgnuplot $xmaxima))
              (merror
               (intl:gettext
                "set_plot_option: plot_format must be either gnuplot, mgnuplot, xmaxima, or geomview; found: ~M") (third value)))
@@ -1159,9 +1153,7 @@ sin(y)*(10.0+6*cos(x)),
              (setq ymax (car l)))))
     (list '(mlist) ymin ymax)))
 
-(defvar $gnuplot_view_args (if (string= *autoconf-win32* "true")
-                               "~s -"
-                               "-persist ~s"))
+(defvar $gnuplot_view_args #+windows"~s -" #-windows"-persist ~s")
 
 (defvar $gnuplot_file_args "~s")
 
@@ -1721,9 +1713,7 @@ output-file))
   (cond ($show_openplot
          (with-open-file (st1 (plot-temp-file "maxout.xmaxima") :direction :output :if-exists :supersede)
            (princ  ans st1))
-         ($system (concatenate 'string *maxima-prefix* 
-                                       (if (string= *autoconf-win32* "true") "\\bin\\" "/bin/") 
-                                       $xmaxima_plot_command)
+         ($system (concatenate 'string *maxima-prefix* #+windows"\\bin\\" #-windows"/bin/" $xmaxima_plot_command)
                   (format nil " \"~a\"" (plot-temp-file "maxout.xmaxima"))))
         (t (princ ans) "")))
 
@@ -2109,8 +2099,7 @@ Several functions depending on the two variables v1 and v2:
                  ($xmaxima
                   ($system
                    (concatenate
-                    'string *maxima-prefix* 
-                    (if (string= *autoconf-win32* "true") "\\bin\\" "/bin/")
+                    'string *maxima-prefix* #+windows"\\bin\\" #-windows"/bin/"
                     $xmaxima_plot_command) 
                    (format nil " \"~a\"" file)))
                  ($geomview 

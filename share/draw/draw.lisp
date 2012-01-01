@@ -40,7 +40,7 @@
 
 (defvar $draw_compound t)
 
-(defvar *windows-OS* (string= *autoconf-win32* "true"))
+(defvar *windows-OS* #+windows t #-windows nil)
 
 (defmacro write-font-type ()
    '(if (string= (get-option '$font) "")
