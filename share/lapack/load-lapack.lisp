@@ -1,16 +1,8 @@
 (in-package #-gcl #:maxima #+GCL "MAXIMA")
 
-#+nil
-(progn
-  (format t "path = ~A~%" (combine-path *maxima-sharedir* "lapack"))
-  (format t "*load-truename* = ~A~%" *load-truename*)
-  (format t "sys = ~A~%" (merge-pathnames (make-pathname :name "lapack" :type "system")
-					  *load-truename*)))
+;;(pushnew (merge-pathnames "lapack/" *maxima-sharedir*) asdf:*central-registry*)
 
-#+ecl ($load "lisp-utils/defsystem.lisp")
+(pushnew (concatenate 'string  *maxima-sharedir* "/lapack/") asdf:*central-registry*)
 
-(load (merge-pathnames (make-pathname :name "lapack" :type "system")
-		       #-gcl *load-pathname*
-		       #+gcl sys:*load-pathname*))
-
-(mk:oos "lapack-interface" :compile)
+(let ((*READ-DEFAULT-FLOAT-FORMAT* 'double-float)) ;; maxima use double-float
+  (asdf:load-system :lapack-interface))
