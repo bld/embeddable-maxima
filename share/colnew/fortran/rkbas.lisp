@@ -1,20 +1,14 @@
 ;;; Compiled by f2cl version:
-;;; ("f2cl1.l,v 1.221 2010/05/26 19:25:52 rtoy Exp $"
-;;;  "f2cl2.l,v 1.37 2008/02/22 22:19:33 rtoy Exp $"
-;;;  "f2cl3.l,v 1.6 2008/02/22 22:19:33 rtoy Exp $"
-;;;  "f2cl4.l,v 1.7 2008/02/22 22:19:34 rtoy Exp $"
-;;;  "f2cl5.l,v 1.204 2010/02/23 05:21:30 rtoy Exp $"
-;;;  "f2cl6.l,v 1.48 2008/08/24 00:56:27 rtoy Exp $"
-;;;  "macros.l,v 1.114 2010/05/17 01:42:14 rtoy Exp $")
+;;; ("" "" "" "" "" "" "")
 
-;;; Using Lisp CMU Common Lisp CVS Head 2010-05-25 18:21:07 (20A Unicode)
+;;; Using Lisp SBCL 1.0.54
 ;;; 
 ;;; Options: ((:prune-labels nil) (:auto-save t) (:relaxed-array-decls t)
 ;;;           (:coerce-assigns :as-needed) (:array-type ':array)
 ;;;           (:array-slicing t) (:declare-common nil)
 ;;;           (:float-format double-float))
 
-(in-package :colnew)
+(in-package "COLNEW")
 
 
 (defun rkbas (s coef k m rkb dm mode)
@@ -32,7 +26,8 @@
       (declare (type double-float p)
                (type (f2cl-lib:integer4) kpm1 i l lb j)
                (type (array double-float (10)) t$))
-      (if (= k 1) (go label70))
+      (if (= k 1)
+          (go label70))
       (setf kpm1 (f2cl-lib:int-sub (f2cl-lib:int-add k m) 1))
       (f2cl-lib:fdo (i 1 (f2cl-lib:int-add i 1))
                     ((> i kpm1) nil)
@@ -47,9 +42,7 @@
                         ((> i k) nil)
             (tagbody
               (setf p
-                      (f2cl-lib:fref coef-%data%
-                                     (1 i)
-                                     ((1 k) (1 1))
+                      (f2cl-lib:fref coef-%data% (1 i) ((1 k) (1 1))
                                      coef-%offset%))
               (f2cl-lib:fdo (j 2 (f2cl-lib:int-add j 1))
                             ((> j k) nil)
@@ -57,26 +50,22 @@
                   (setf p
                           (+
                            (* p
-                              (f2cl-lib:fref t$
-                                             ((f2cl-lib:int-sub lb j))
+                              (f2cl-lib:fref t$ ((f2cl-lib:int-sub lb j))
                                              ((1 10))))
-                           (f2cl-lib:fref coef-%data%
-                                          (j i)
-                                          ((1 k) (1 1))
+                           (f2cl-lib:fref coef-%data% (j i) ((1 k) (1 1))
                                           coef-%offset%)))
                  label20))
               (setf (f2cl-lib:fref rkb-%data% (i l) ((1 7) (1 1)) rkb-%offset%)
                       p)
              label30))
          label40))
-      (if (= mode 0) (go end_label))
+      (if (= mode 0)
+          (go end_label))
       (f2cl-lib:fdo (i 1 (f2cl-lib:int-add i 1))
                     ((> i k) nil)
         (tagbody
           (setf p
-                  (f2cl-lib:fref coef-%data%
-                                 (1 i)
-                                 ((1 k) (1 1))
+                  (f2cl-lib:fref coef-%data% (1 i) ((1 k) (1 1))
                                  coef-%offset%))
           (f2cl-lib:fdo (j 2 (f2cl-lib:int-add j 1))
                         ((> j k) nil)
@@ -87,12 +76,9 @@
                        (* p
                           (f2cl-lib:fref t$
                                          ((f2cl-lib:int-sub
-                                           (f2cl-lib:int-add k 1)
-                                           j))
+                                           (f2cl-lib:int-add k 1) j))
                                          ((1 10))))
-                       (f2cl-lib:fref coef-%data%
-                                      (j i)
-                                      ((1 k) (1 1))
+                       (f2cl-lib:fref coef-%data% (j i) ((1 k) (1 1))
                                       coef-%offset%)))))
           (setf (f2cl-lib:fref dm-%data% (i) ((1 1)) dm-%offset%) p)
          label60))
@@ -108,11 +94,15 @@
 #+#.(cl:if (cl:find-package '#:f2cl) '(and) '(or))
 (eval-when (:load-toplevel :compile-toplevel :execute)
   (setf (gethash 'fortran-to-lisp::rkbas fortran-to-lisp::*f2cl-function-info*)
-          (fortran-to-lisp::make-f2cl-finfo
-           :arg-types '(double-float (array double-float (*))
-                        (fortran-to-lisp::integer4) (fortran-to-lisp::integer4)
-                        (array double-float (7)) (array double-float (1))
-                        (fortran-to-lisp::integer4))
-           :return-values '(nil nil nil nil nil nil nil)
-           :calls 'nil)))
+          (fortran-to-lisp::make-f2cl-finfo :arg-types
+                                            '(double-float
+                                              (array double-float (*))
+                                              (fortran-to-lisp::integer4)
+                                              (fortran-to-lisp::integer4)
+                                              (array double-float (*))
+                                              (array double-float (*))
+                                              (fortran-to-lisp::integer4))
+                                            :return-values
+                                            '(nil nil nil nil nil nil nil)
+                                            :calls 'nil)))
 

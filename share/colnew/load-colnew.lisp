@@ -1,9 +1,7 @@
-#+nil
-(format t "colnew.system = ~S~%" (merge-pathnames (make-pathname :name "colnew" :type "system")
-						  #-gcl *load-pathname*
-						  #+gcl sys:*load-pathname*))
-(load (merge-pathnames (make-pathname :name "colnew" :type "system")
-		       #-gcl *load-pathname*
-		       #+gcl sys:*load-pathname*))
+(in-package #-gcl #:maxima #+GCL "MAXIMA")
 
-(mk:oos "colnew-if" :compile)
+;;(pushnew (merge-pathnames "colnew/" *maxima-sharedir*) asdf:*central-registry*)
+(pushnew (concatenate 'string  *maxima-sharedir* "/colnew/") asdf:*central-registry*)
+
+(let ((*READ-DEFAULT-FLOAT-FORMAT* 'double-float)) ;; maxima use double-float
+  (asdf:load-system :colnew-interface))

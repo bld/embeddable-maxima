@@ -1,49 +1,38 @@
 ;;; Compiled by f2cl version:
-;;; ("f2cl1.l,v 1.221 2010/05/26 19:25:52 rtoy Exp $"
-;;;  "f2cl2.l,v 1.37 2008/02/22 22:19:33 rtoy Exp $"
-;;;  "f2cl3.l,v 1.6 2008/02/22 22:19:33 rtoy Exp $"
-;;;  "f2cl4.l,v 1.7 2008/02/22 22:19:34 rtoy Exp $"
-;;;  "f2cl5.l,v 1.204 2010/02/23 05:21:30 rtoy Exp $"
-;;;  "f2cl6.l,v 1.48 2008/08/24 00:56:27 rtoy Exp $"
-;;;  "macros.l,v 1.114 2010/05/17 01:42:14 rtoy Exp $")
+;;; ("" "" "" "" "" "" "")
 
-;;; Using Lisp CMU Common Lisp CVS Head 2010-05-25 18:21:07 (20A Unicode)
+;;; Using Lisp SBCL 1.0.54
 ;;; 
 ;;; Options: ((:prune-labels nil) (:auto-save t) (:relaxed-array-decls t)
 ;;;           (:coerce-assigns :as-needed) (:array-type ':array)
 ;;;           (:array-slicing t) (:declare-common nil)
 ;;;           (:float-format double-float))
 
-(in-package :colnew)
+(in-package "COLNEW")
 
 
 (defun errchk (xi z dmz valstr ifin)
   (declare (type (f2cl-lib:integer4) ifin)
            (type (array double-float (*)) valstr dmz z xi))
   (let ((colord-m
-         (make-array 20
-                     :element-type 'f2cl-lib:integer4
-                     :displaced-to (colord-part-0 *colord-common-block*)
+         (make-array 20 :element-type 'f2cl-lib:integer4 :displaced-to
+                     (colord-part-0 *colord-common-block*)
                      :displaced-index-offset 5))
         (colbas-asave
-         (make-array 112
-                     :element-type 'double-float
-                     :displaced-to (colbas-part-0 *colbas-common-block*)
+         (make-array 112 :element-type 'double-float :displaced-to
+                     (colbas-part-0 *colbas-common-block*)
                      :displaced-index-offset 224))
         (colest-wgterr
-         (make-array 40
-                     :element-type 'double-float
-                     :displaced-to (colest-part-0 *colest-common-block*)
+         (make-array 40 :element-type 'double-float :displaced-to
+                     (colest-part-0 *colest-common-block*)
                      :displaced-index-offset 80))
         (colest-tolin
-         (make-array 40
-                     :element-type 'double-float
-                     :displaced-to (colest-part-0 *colest-common-block*)
+         (make-array 40 :element-type 'double-float :displaced-to
+                     (colest-part-0 *colest-common-block*)
                      :displaced-index-offset 120))
         (colest-ltol
-         (make-array 40
-                     :element-type 'f2cl-lib:integer4
-                     :displaced-to (colest-part-1 *colest-common-block*)
+         (make-array 40 :element-type 'f2cl-lib:integer4 :displaced-to
+                     (colest-part-1 *colest-common-block*)
                      :displaced-index-offset 40)))
     (symbol-macrolet ((iout (aref (colout-part-1 *colout-common-block*) 0))
                       (iprint (aref (colout-part-1 *colout-common-block*) 1))
@@ -73,7 +62,7 @@
                    (type (array double-float (1)) dummy)
                    (type double-float x)
                    (type (f2cl-lib:integer4) j iback i knew kstore l ltolj ltjz
-                                             lj mj))
+                    lj mj))
           (setf ifin 1)
           (setf mshflg 1)
           (f2cl-lib:fdo (j 1 (f2cl-lib:int-add j 1))
@@ -87,16 +76,14 @@
                       (f2cl-lib:int-add
                        (f2cl-lib:int-mul
                         (f2cl-lib:int-add
-                         (f2cl-lib:int-mul 4 (f2cl-lib:int-sub i 1))
-                         2)
+                         (f2cl-lib:int-mul 4 (f2cl-lib:int-sub i 1)) 2)
                         mstar)
                        1))
               (setf kstore
                       (f2cl-lib:int-add
                        (f2cl-lib:int-mul
                         (f2cl-lib:int-add
-                         (f2cl-lib:int-mul 2 (f2cl-lib:int-sub i 1))
-                         1)
+                         (f2cl-lib:int-mul 2 (f2cl-lib:int-sub i 1)) 1)
                         mstar)
                        1))
               (setf x
@@ -104,26 +91,23 @@
                          (/
                           (*
                            (-
-                            (f2cl-lib:fref xi-%data%
-                                           ((f2cl-lib:int-add i 1))
-                                           ((1 1))
-                                           xi-%offset%)
+                            (f2cl-lib:fref xi-%data% ((f2cl-lib:int-add i 1))
+                                           ((1 1)) xi-%offset%)
                             (f2cl-lib:fref xi-%data% (i) ((1 1)) xi-%offset%))
                            2.0)
                           3.0)))
               (multiple-value-bind
-                    (var-0 var-1 var-2 var-3 var-4 var-5 var-6 var-7 var-8
-                     var-9 var-10 var-11 var-12 var-13 var-14 var-15 var-16)
+                  (var-0 var-1 var-2 var-3 var-4 var-5 var-6 var-7 var-8 var-9
+                   var-10 var-11 var-12 var-13 var-14 var-15 var-16)
                   (approx i x
-                   (f2cl-lib:array-slice valstr double-float (knew) ((1 1)))
-                   (f2cl-lib:array-slice asave
-                                         double-float
-                                         (1 3)
+                   (f2cl-lib:array-slice valstr-%data% double-float (knew)
+                                         ((1 1)) valstr-%offset%)
+                   (f2cl-lib:array-slice asave double-float (1 3)
                                          ((1 28) (1 4)))
                    dummy xi n z dmz k ncomp mmax m mstar 4 dummy 0)
-                (declare (ignore var-2 var-3 var-4 var-5 var-6 var-7 var-8
-                                 var-9 var-10 var-11 var-12 var-13 var-14
-                                 var-15 var-16))
+                (declare
+                 (ignore var-2 var-3 var-4 var-5 var-6 var-7 var-8 var-9 var-10
+                  var-11 var-12 var-13 var-14 var-15 var-16))
                 (setf i var-0)
                 (setf x var-1))
               (f2cl-lib:fdo (l 1 (f2cl-lib:int-add l 1))
@@ -133,13 +117,9 @@
                           (* (f2cl-lib:fref wgterr (l) ((1 40)))
                              (f2cl-lib:dabs
                               (-
-                               (f2cl-lib:fref valstr-%data%
-                                              (knew)
-                                              ((1 1))
+                               (f2cl-lib:fref valstr-%data% (knew) ((1 1))
                                               valstr-%offset%)
-                               (f2cl-lib:fref valstr-%data%
-                                              (kstore)
-                                              ((1 1))
+                               (f2cl-lib:fref valstr-%data% (kstore) ((1 1))
                                               valstr-%offset%)))))
                   (setf knew (f2cl-lib:int-add knew 1))
                   (setf kstore (f2cl-lib:int-add kstore 1))
@@ -148,37 +128,32 @@
                       (f2cl-lib:int-add
                        (f2cl-lib:int-mul
                         (f2cl-lib:int-add
-                         (f2cl-lib:int-mul 4 (f2cl-lib:int-sub i 1))
-                         1)
+                         (f2cl-lib:int-mul 4 (f2cl-lib:int-sub i 1)) 1)
                         mstar)
                        1))
               (setf kstore
                       (f2cl-lib:int-add
-                       (f2cl-lib:int-mul 2 (f2cl-lib:int-sub i 1) mstar)
-                       1))
+                       (f2cl-lib:int-mul 2 (f2cl-lib:int-sub i 1) mstar) 1))
               (setf x
                       (+ (f2cl-lib:fref xi-%data% (i) ((1 1)) xi-%offset%)
                          (/
                           (-
-                           (f2cl-lib:fref xi-%data%
-                                          ((f2cl-lib:int-add i 1))
-                                          ((1 1))
-                                          xi-%offset%)
+                           (f2cl-lib:fref xi-%data% ((f2cl-lib:int-add i 1))
+                                          ((1 1)) xi-%offset%)
                            (f2cl-lib:fref xi-%data% (i) ((1 1)) xi-%offset%))
                           3.0)))
               (multiple-value-bind
-                    (var-0 var-1 var-2 var-3 var-4 var-5 var-6 var-7 var-8
-                     var-9 var-10 var-11 var-12 var-13 var-14 var-15 var-16)
+                  (var-0 var-1 var-2 var-3 var-4 var-5 var-6 var-7 var-8 var-9
+                   var-10 var-11 var-12 var-13 var-14 var-15 var-16)
                   (approx i x
-                   (f2cl-lib:array-slice valstr double-float (knew) ((1 1)))
-                   (f2cl-lib:array-slice asave
-                                         double-float
-                                         (1 2)
+                   (f2cl-lib:array-slice valstr-%data% double-float (knew)
+                                         ((1 1)) valstr-%offset%)
+                   (f2cl-lib:array-slice asave double-float (1 2)
                                          ((1 28) (1 4)))
                    dummy xi n z dmz k ncomp mmax m mstar 4 dummy 0)
-                (declare (ignore var-2 var-3 var-4 var-5 var-6 var-7 var-8
-                                 var-9 var-10 var-11 var-12 var-13 var-14
-                                 var-15 var-16))
+                (declare
+                 (ignore var-2 var-3 var-4 var-5 var-6 var-7 var-8 var-9 var-10
+                  var-11 var-12 var-13 var-14 var-15 var-16))
                 (setf i var-0)
                 (setf x var-1))
               (f2cl-lib:fdo (l 1 (f2cl-lib:int-add l 1))
@@ -189,13 +164,9 @@
                              (* (f2cl-lib:fref wgterr (l) ((1 40)))
                                 (f2cl-lib:dabs
                                  (-
-                                  (f2cl-lib:fref valstr-%data%
-                                                 (knew)
-                                                 ((1 1))
+                                  (f2cl-lib:fref valstr-%data% (knew) ((1 1))
                                                  valstr-%offset%)
-                                  (f2cl-lib:fref valstr-%data%
-                                                 (kstore)
-                                                 ((1 1))
+                                  (f2cl-lib:fref valstr-%data% (kstore) ((1 1))
                                                  valstr-%offset%))))))
                   (setf knew (f2cl-lib:int-add knew 1))
                   (setf kstore (f2cl-lib:int-add kstore 1))
@@ -207,7 +178,8 @@
                           (f2cl-lib:dmax1 (f2cl-lib:fref errest (l) ((1 40)))
                                           (f2cl-lib:fref err (l) ((1 40)))))
                  label40))
-              (if (= ifin 0) (go label60))
+              (if (= ifin 0)
+                  (go label60))
               (f2cl-lib:fdo (j 1 (f2cl-lib:int-add j 1))
                             ((> j ntol) nil)
                 (tagbody
@@ -215,19 +187,19 @@
                   (setf ltjz
                           (f2cl-lib:int-add ltolj
                                             (f2cl-lib:int-mul
-                                             (f2cl-lib:int-sub i 1)
-                                             mstar)))
-                  (if
-                   (> (f2cl-lib:fref err (ltolj) ((1 40)))
-                      (* (f2cl-lib:fref tolin (j) ((1 40)))
-                         (+
-                          (f2cl-lib:dabs
-                           (f2cl-lib:fref z-%data% (ltjz) ((1 1)) z-%offset%))
-                          1.0)))
-                   (setf ifin 0))
+                                             (f2cl-lib:int-sub i 1) mstar)))
+                  (if (> (f2cl-lib:fref err (ltolj) ((1 40)))
+                         (* (f2cl-lib:fref tolin (j) ((1 40)))
+                            (+
+                             (f2cl-lib:dabs
+                              (f2cl-lib:fref z-%data% (ltjz) ((1 1))
+                                             z-%offset%))
+                             1.0)))
+                      (setf ifin 0))
                  label50))
              label60))
-          (if (>= iprint 0) (go end_label))
+          (if (>= iprint 0)
+              (go end_label))
           (f2cl-lib:fformat iout ("~%" " THE ESTIMATED ERRORS ARE," "~%"))
           (setf lj 1)
           (f2cl-lib:fdo (j 1 (f2cl-lib:int-add j 1))
@@ -257,10 +229,14 @@
 (eval-when (:load-toplevel :compile-toplevel :execute)
   (setf (gethash 'fortran-to-lisp::errchk
                  fortran-to-lisp::*f2cl-function-info*)
-          (fortran-to-lisp::make-f2cl-finfo
-           :arg-types '((array double-float (1)) (array double-float (1))
-                        (array double-float (1)) (array double-float (1))
-                        (fortran-to-lisp::integer4))
-           :return-values '(nil nil nil nil fortran-to-lisp::ifin)
-           :calls '(fortran-to-lisp::approx))))
+          (fortran-to-lisp::make-f2cl-finfo :arg-types
+                                            '((array double-float (*))
+                                              (array double-float (*))
+                                              (array double-float (*))
+                                              (array double-float (*))
+                                              (fortran-to-lisp::integer4))
+                                            :return-values
+                                            '(nil nil nil nil
+                                              fortran-to-lisp::ifin)
+                                            :calls '(fortran-to-lisp::approx))))
 
