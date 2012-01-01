@@ -24,11 +24,6 @@
   (:export #:match-unique-abbreviation
 	   #:getopt))
 
-;; GCL has SLOOP built in but it's slightly different now...
-(defpackage :cl-sloop
-  (:use :common-lisp)
-  (:export #:sloop))
-
 (defpackage :maxima
   (:use :common-lisp :command-line)
   ;; Gcl has DEFINE-COMPILER-MACRO but it's in the SYSTEM package.  So
@@ -37,7 +32,6 @@
   #+gcl
   (:shadowing-import-from #:system #:define-compiler-macro)
   (:nicknames :cl-macsyma :cl-maxima :macsyma)
-  (:import-from :cl-sloop #:sloop)
   (:shadow continue		 ;(macsys): part of the top-level loop
 	   //                           ;(clmacs): arithmetic operator
 	   float		  ;(clmacs): has 1.0 as default format

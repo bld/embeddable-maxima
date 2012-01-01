@@ -37,8 +37,6 @@
                           :components ((:file "nregex")
                                        (:file "intl")
                                        (:file "cl-info" :depends-on ("intl"))))
-                         (:module sloop
-                          :components ((:file "sloop")))
                          (:module declarations
                           :components ((:file "lmdcls"))) 
                          (:module destructuring-let
