@@ -238,6 +238,8 @@ When one changes, the other does too."
       (setf (get 'cl-info::cause-maxima-index-to-load 'autoload)
 	    (combine-path *maxima-infodir* subdir-bit "maxima-index.lisp")))))
 
+(set-pathnames)
+
 (defun process-maxima-args (input-stream batch-flag)
   ;;    (format t "processing maxima args = ")
   ;;    (mapc #'(lambda (x) (format t "\"~a\"~%" x)) (get-application-args))
