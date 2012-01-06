@@ -1,5 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on January, 6 2012 by texi2html 1.76 -->
+<!--
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people <dev@texi2html.cvshome.org>
+Send bugs and suggestions to <users@texi2html.cvshome.org>
 
+-->
+<head>
+<title>Maxima VERSION Manual: </title>
 
+<meta name="description" content="Maxima VERSION Manual: ">
+<meta name="keywords" content="Maxima VERSION Manual: ">
+<meta name="resource-type" content="document">
+
+<link rel="icon" href="http://maxima.sourceforge.net/favicon.ico"/>
+
+<link href="./doc/info/manual.css" media="all" rel="stylesheet" type="text/css"/>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
 <h1>Embeddable Maxima</h1>
 
 <h2>Download</h2>
@@ -9,14 +32,14 @@
 
 <p>or</p>
 
-<pre>
+<pre class="example">
 git clone https://filonenko-mikhail@github.com/filonenko-mikhail/maxima.git
 git checkout -b quicklisp --track origin/quicklisp
 </pre>
 
 <p>or</p>
 
-<pre>
+<pre class="example">
 mkdir maxima.quicklisp
 cd maxima.quicklisp
 git init
@@ -27,7 +50,7 @@ git checkout -b quicklisp --track origin/quicklisp
 
 <h2>Usage</h2>
 
-<pre>
+<pre class="example">
 emacs
 M+x slime
   (pushnew "/path/to/maxima/" asdf:*central-registry*)
@@ -43,13 +66,13 @@ M+x slime
 
 <p>Example</p>
 
-<pre>
+<pre class="example">
 [2*x + y - z = 8, -3*x - y + 2*z = -11, -2*x + y + 2*z = -3]
 </pre>
 
 <p>Maxima provides cl macroreader #$expr$ to expand maxima language expressions.</p>
 
-<pre>
+<pre class="example">
 #$[2*x + y - z = 8, -3*x - y + 2*z = -11, -2*x + y + 2*z = -3]$
 
 ((MLIST SIMP)
@@ -62,22 +85,25 @@ M+x slime
   -3))
 </pre>
 
-<p>We should use function solve. In cl environment it has name $solve.</p>
+<p>We should use function solve. It has name $solve in cl environment.</p>
 
-<pre>
+<pre class="example">
 ($solve #$[2*x + y - z = 8, -3*x - y + 2*z = -11, -2*x + y + 2*z = -3]$)
 
 ((MLIST) ((MLIST) ((MEQUAL) $Z -1) ((MEQUAL) $Y 3) ((MEQUAL) $X 2)))
 </pre>
 
-<p>Convert given AST to maxima expression (1d, 2d or latex, it depends on display2d option):</p>
+<p>Let's translate given AST to maxima expression (1d, 2d or latex, it depends on display2d option):</p>
 
 
-<pre>
+<pre class="example">
 (displa '((MLIST) ((MLIST) ((MEQUAL) $Z -1) ((MEQUAL) $Y 3) ((MEQUAL) $X 2))))
 
 [ [z = - 1, y = 3, x = 2] ]
 </pre>
 
+<h2><a href="./doc/info/html/maxima_37.html#SEC198">Maxima and Common Lisp</a></h2>
+<h2><a href="./doc/info/html/maxima.html">Maxima documentation</a></h2>
 
-<p><a href="./doc/info/html/maxima.html">Maxima documentation</a></p>
+</body>
+</html>
