@@ -1,0 +1,407 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created on January 6, 2012 by texi2html 5.0
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
+<head>
+<title>Untitled Document</title>
+
+<meta name="description" content="Untitled Document">
+<meta name="keywords" content="Untitled Document">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 5.0">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smalllisp {margin-left: 3.2em}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:pre}
+span.nolinebreak {white-space:pre}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Structures"></a>
+<table class="header" cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[ &lt;&lt; ]</td>
+<td valign="middle" align="left">[ &lt; ]</td>
+<td valign="middle" align="left">[ Up ]</td>
+<td valign="middle" align="left">[<a href="#Introduction-to-Structures" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left">[ &gt;&gt; ]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Structures" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Structures-1"></a>
+<h2 class="section">1 Structures</h2>
+
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#Introduction-to-Structures">1.1 Introduction to Structures</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">       
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Functions-and-Variables-for-Structures">1.2 Functions and Variables for Structures</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">       
+</td></tr>
+</table>
+
+<hr>
+<a name="Introduction-to-Structures"></a>
+<table class="header" cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Structures" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Structures" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Structures" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#Functions-and-Variables-for-Structures" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left">[ &gt;&gt; ]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Structures" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Introduction-to-Structures-1"></a>
+<h3 class="subsection">1.1 Introduction to Structures</h3>
+
+<p>Maxima provides a simple data aggregate called a structure.
+A structure is an expression in which arguments are identified by name (the field name)
+and the expression as a whole is identified by its operator (the structure name).
+A field value can be any expression.
+</p>
+<p>A structure is defined by the <code>defstruct</code> function;
+the global variable <code>structures</code> is the list of user-defined structures.
+The function <code>new</code> creates instances of structures.
+The <code>@</code> operator refers to fields.
+<code>kill(<var>S</var>)</code> removes the structure definition <var>S</var>,
+and <code>kill(<var>x</var>@ <var>a</var>)</code> unbinds the field <var>a</var> of the structure instance <var>x</var>.
+</p>
+<p>In the pretty-printing console display (with <code>display2d</code> equal to <code>true</code>),
+structure instances are displayed with the value of each field
+represented as an equation, with the field name on the left-hand side
+and the value on the right-hand side.
+(The equation is only a display construct; only the value is actually stored.)
+In 1-dimensional display (via <code>grind</code> or with <code>display2d</code> equal to <code>false</code>),
+structure instances are displayed without the field names.
+</p>
+<p>There is no way to use a field name as a function name,
+although a field value can be a lambda expression.
+Nor can the values of fields be restricted to certain types; any field can be assigned any kind of expression.
+There is no way to make some fields accessible or inaccessible in different contexts;
+all fields are always visible.
+</p>
+<hr>
+<a name="Functions-and-Variables-for-Structures"></a>
+<table class="header" cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Structures" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Introduction-to-Structures" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Structures" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[ &gt; ]</td>
+<td valign="middle" align="left">[ &gt;&gt; ]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Structures" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Functions-and-Variables-for-Structures-1"></a>
+<h3 class="subsection">1.2 Functions and Variables for Structures</h3>
+
+<dl>
+<dt><a name="index-structures"></a>Global variable: <strong>structures</strong></dt>
+<dd>
+<p><code>structures</code> is the list of user-defined structures defined by <code>defstruct</code>.
+</p>
+<p>@opencatbox
+@category{Structures} @category{Global variables}
+@closecatbox
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-defstruct"></a>Function: <strong>defstruct</strong><em> (<var>S</var>(<var>a_1</var>, &hellip;, <var>a_n</var>))</em></dt>
+<dt><a name="index-defstruct-1"></a>Function: <strong>defstruct</strong><em> (<var>S</var>(<var>a_1</var> = <var>v_1</var>, &hellip;, <var>a_n</var> = <var>v_n</var>))</em></dt>
+<dd>
+<p>Define a structure, which is a list of named fields <var>a_1</var>, &hellip;,
+<var>a_n</var> associated with a symbol <var>S</var>.
+An instance of a structure is just an expression which has operator <var>S</var>
+and exactly <code>n</code> arguments.
+<code>new(<var>S</var>)</code> creates a new instance of structure <var>S</var>.
+</p>
+<p>An argument which is just a symbol <var>a</var> specifies the name of a field.
+An argument which is an equation <code><var>a</var> = <var>v</var></code> specifies the field name <var>a</var>
+and its default value <var>v</var>.
+The default value can be any expression.
+</p>
+<p><code>defstruct</code> puts <var>S</var> on the list of user-defined structures, <code>structures</code>.
+</p>
+<p><code>kill(<var>S</var>)</code> removes <var>S</var> from the list of user-defined structures,
+and removes the structure definition.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) defstruct (foo (a, b, c));
+(%o1)                    [foo(a, b, c)]
+(%i2) structures;
+(%o2)                    [foo(a, b, c)]
+(%i3) new (foo);
+(%o3)                     foo(a, b, c)
+(%i4) defstruct (bar (v, w, x = 123, y = %pi));
+(%o4)             [bar(v, w, x = 123, y = %pi)]
+(%i5) structures;
+(%o5)      [foo(a, b, c), bar(v, w, x = 123, y = %pi)]
+(%i6) new (bar);
+(%o6)              bar(v, w, x = 123, y = %pi)
+(%i7) kill (foo);
+(%o7)                         done
+(%i8) structures;
+(%o8)             [bar(v, w, x = 123, y = %pi)]
+</pre></div>
+
+<p>@opencatbox
+@category{Structures}
+@closecatbox
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-new"></a>Function: <strong>new</strong><em> (<var>S</var>)</em></dt>
+<dt><a name="index-new-1"></a>Function: <strong>new</strong><em> (<var>S</var> (<var>v_1</var>, &hellip;, <var>v_n</var>))</em></dt>
+<dd>
+<p><code>new</code> creates new instances of structures.
+</p>
+<p><code>new(<var>S</var>)</code> creates a new instance of structure <var>S</var>
+in which each field is assigned its default value, if any,
+or no value at all if no default was specified in the structure definition.
+</p>
+<p><code>new(<var>S</var>(<var>v_1</var>, ..., <var>v_n</var>))</code> creates a new instance of <var>S</var>
+in which fields are assigned the values <var>v_1</var>, &hellip;, <var>v_n</var>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) defstruct (foo (w, x = %e, y = 42, z));
+(%o1)              [foo(w, x = %e, y = 42, z)]
+(%i2) new (foo);
+(%o2)               foo(w, x = %e, y = 42, z)
+(%i3) new (foo (1, 2, 4, 8));
+(%o3)            foo(w = 1, x = 2, y = 4, z = 8)
+</pre></div>
+
+<p>@opencatbox
+@category{Structures}
+@closecatbox
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-_0040"></a>Operator: <strong>@</strong></dt>
+<dd>
+<p><code>@</code> is the structure field access operator.
+The expression <code><var>x</var>@ <var>a</var></code> refers to the value of field <var>a</var> of the structure instance <var>x</var>.
+The field name is not evaluated.
+</p>
+<p>If the field <var>a</var> in <var>x</var> has not been assigned a value,
+<code><var>x</var>@ <var>a</var></code> evaluates to itself.
+</p>
+<p><code>kill(<var>x</var>@ <var>a</var>)</code> removes the value of field <var>a</var> in <var>x</var>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) defstruct (foo (x, y, z));
+(%o1)                    [foo(x, y, z)]
+(%i2) u : new (foo (123, a - b, %pi));
+(%o2)           foo(x = 123, y = a - b, z = %pi)
+(%i3) u@z;
+(%o3)                          %pi
+(%i4) u@z : %e;
+(%o4)                          %e
+(%i5) u;
+(%o5)            foo(x = 123, y = a - b, z = %e)
+(%i6) kill (u@z);
+(%o6)                         done
+(%i7) u;
+(%o7)              foo(x = 123, y = a - b, z)
+(%i8) u@z;
+(%o8)                          u@z
+</pre></div>
+
+<p>The field name is not evaluated.
+</p>
+<div class="example">
+<pre class="example">(%i1) defstruct (bar (g, h));
+(%o1)                      [bar(g, h)]
+(%i2) x : new (bar);
+(%o2)                       bar(g, h)
+(%i3) x@h : 42;
+(%o3)                          42
+(%i4) h : 123;
+(%o4)                          123
+(%i5) x@h;
+(%o5)                          42
+(%i6) x@h : 19;
+(%o6)                          19
+(%i7) x;
+(%o7)                    bar(g, h = 19)
+(%i8) h;
+(%o8)                          123
+</pre></div>
+
+<p>@opencatbox
+@category{Structures} @category{Operators}
+@closecatbox
+</p></dd></dl>
+
+<hr size="6">
+<a name="SEC_About"></a>
+<table class="header" cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Structures" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1>About This Document</h1>
+
+<p>
+  This document was generated on <i>January 6, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 5.0</i></a>.
+</p>
+<p>
+  The buttons in the navigation panels have the following meaning:
+</p>
+<table border="1">
+  <tr>
+    <th> Button </th>
+    <th> Name </th>
+    <th> Go to </th>
+    <th> From 1.2.3 go to</th>
+  </tr>
+  <tr>
+    <td align="center"> [ &lt;&lt; ] </td>
+    <td align="center">FastBack</td>
+    <td>Beginning of this chapter or previous chapter</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td align="center"> [ &lt; ] </td>
+    <td align="center">Back</td>
+    <td>Previous section in reading order</td>
+    <td>1.2.2</td>
+  </tr>
+  <tr>
+    <td align="center"> [ Up ] </td>
+    <td align="center">Up</td>
+    <td>Up section</td>
+    <td>1.2</td>
+  </tr>
+  <tr>
+    <td align="center"> [ &gt; ] </td>
+    <td align="center">Forward</td>
+    <td>Next section in reading order</td>
+    <td>1.2.4</td>
+  </tr>
+  <tr>
+    <td align="center"> [ &gt;&gt; ] </td>
+    <td align="center">FastForward</td>
+    <td>Next chapter</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td align="center"> [Top] </td>
+    <td align="center">Top</td>
+    <td>Cover (top) of document</td>
+    <td> &nbsp; </td>
+  </tr>
+  <tr>
+    <td align="center"> [Contents] </td>
+    <td align="center">Contents</td>
+    <td>Table of contents</td>
+    <td> &nbsp; </td>
+  </tr>
+  <tr>
+    <td align="center"> [Index] </td>
+    <td align="center">Index</td>
+    <td>Index</td>
+    <td> &nbsp; </td>
+  </tr>
+  <tr>
+    <td align="center"> [ ? ] </td>
+    <td align="center">About</td>
+    <td>About (help)</td>
+    <td> &nbsp; </td>
+  </tr>
+</table>
+
+<p>
+  where the <strong> Example </strong> assumes that the current position is at <strong> Subsubsection One-Two-Three </strong> of a document of the following structure:
+</p>
+
+<ul>
+  <li> 1. Section One
+    <ul>
+      <li>1.1 Subsection One-One
+        <ul>
+          <li>...</li>
+        </ul>
+      </li>
+      <li>1.2 Subsection One-Two
+        <ul>
+          <li>1.2.1 Subsubsection One-Two-One</li>
+          <li>1.2.2 Subsubsection One-Two-Two</li>
+          <li>1.2.3 Subsubsection One-Two-Three &nbsp; &nbsp;
+            <strong>&lt;== Current Position </strong></li>
+          <li>1.2.4 Subsubsection One-Two-Four</li>
+        </ul>
+      </li>
+      <li>1.3 Subsection One-Three
+        <ul>
+          <li>...</li>
+        </ul>
+      </li>
+      <li>1.4 Subsection One-Four</li>
+    </ul>
+  </li>
+</ul>
+
+<hr>
+<p>
+ <font size="-1">
+  This document was generated on <i>January 6, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 5.0</i></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>
