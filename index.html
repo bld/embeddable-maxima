@@ -1,3 +1,83 @@
-Documentation
 
 
+<h1>Embeddable Maxima</h1>
+
+<h2>Download</h2>
+
+
+<p><a href="https://github.com/filonenko-mikhail/maxima/tarball/quicklisp">Tarball</a></p>
+
+<p>or</p>
+
+<pre>
+git clone https://filonenko-mikhail@github.com/filonenko-mikhail/maxima.git
+git checkout -b quicklisp --track origin/quicklisp
+</pre>
+
+<p>or</p>
+
+<pre>
+mkdir maxima.quicklisp
+cd maxima.quicklisp
+git init
+git remote add origin https://filonenko-mikhail@github.com/filonenko-mikhail/maxima.git
+git fetch --depth 1 origin quicklisp:refs/remotes/quicklisp
+git checkout -b quicklisp --track origin/quicklisp
+</pre>
+
+<h2>Usage</h2>
+
+<pre>
+emacs
+M+x slime
+  (pushnew "/path/to/maxima/" asdf:*central-registry*)
+  (ql:quickload :maxima)
+  (cl-user::run)
+    run_testsuite();
+    quit();
+</pre>
+
+<h2>Example</h2>
+
+<p>Solve linear equations in common lisp:</p>
+
+<p>Example</p>
+
+<pre>
+[2*x + y - z = 8, -3*x - y + 2*z = -11, -2*x + y + 2*z = -3]
+</pre>
+
+<p>Maxima provides cl macroreader #$expr$ to expand maxima language expressions.</p>
+
+<pre>
+#$[2*x + y - z = 8, -3*x - y + 2*z = -11, -2*x + y + 2*z = -3]$
+
+((MLIST SIMP)
+ ((MEQUAL SIMP) ((MPLUS SIMP) ((MTIMES SIMP) 2 $X) $Y ((MTIMES SIMP) -1 $Z)) 8)
+ ((MEQUAL SIMP)
+  ((MPLUS SIMP) ((MTIMES SIMP) -3 $X) ((MTIMES SIMP) -1 $Y)
+   ((MTIMES SIMP) 2 $Z))
+  -11)
+ ((MEQUAL SIMP) ((MPLUS SIMP) ((MTIMES SIMP) -2 $X) $Y ((MTIMES SIMP) 2 $Z))
+  -3))
+</pre>
+
+<p>We should use function solve. In cl environment it has name $solve.</p>
+
+<pre>
+($solve #$[2*x + y - z = 8, -3*x - y + 2*z = -11, -2*x + y + 2*z = -3]$)
+
+((MLIST) ((MLIST) ((MEQUAL) $Z -1) ((MEQUAL) $Y 3) ((MEQUAL) $X 2)))
+</pre>
+
+<p>Convert given AST to maxima expression (1d, 2d or latex, it depends on display2d option):</p>
+
+
+<pre>
+(displa '((MLIST) ((MLIST) ((MEQUAL) $Z -1) ((MEQUAL) $Y 3) ((MEQUAL) $X 2))))
+
+[ [z = - 1, y = 3, x = 2] ]
+</pre>
+
+
+<p><a href="./doc/info/html/maxima.html">Maxima documentation</a></p>
