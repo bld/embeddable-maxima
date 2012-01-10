@@ -29,11 +29,19 @@
   :components ((:module src
                 :serial t
                 :components 
-                ((:module package
+                (
+                 #+gcl-working-proclaims
+                 (:file "sys-proclaim")
+                 (:module package
                   :components (#-gcl(:file "maxima-package")
                                #+ecl(:file "ecl-port")))
                 (:module info
                  :components ((:file "nregex")
+                                     ;; Some versions of CMUCL already
+				     ;; have a compatible version of
+				     ;; INTL, so skip it if we have
+				     ;; it.
+                              #+#.(cl:if (cl:and (cl:member :cmu cl:*features*) (cl:find-package '#:intl))  '(or) '(and))
                               (:file "intl")
                               (:file "cl-info" :depends-on ("intl"))))
                 (:module declarations
