@@ -365,7 +365,7 @@
   "")
 
 (defmfun $build_info ()
-  (format t (intl:gettext "~%Maxima version: ~a~%") (asdf:component-version (asdf:find-system '#:maxima)))
+  (format t (intl:gettext "~%Maxima version: ~a~%") (asdf:component-version (asdf:find-system '#:embeddable-maxima)))
   (format t (intl:gettext "Maxima build date: ~a:~a ~a/~a/~a~%")
 	  (third cl-user:*maxima-build-time*)
 	  (second cl-user:*maxima-build-time*)
@@ -415,7 +415,7 @@
 (defun maxima-banner ()
   (format t *maxima-prolog*)
   (format t "~&Maxima ~a http://maxima.sourceforge.net~%"
-      (asdf:component-version (asdf:find-system '#:maxima)))
+      (asdf:component-version (asdf:find-system '#:embeddable-maxima)))
   (format t (intl:gettext "using Lisp ~a ~a") (lisp-implementation-type)
       #-clisp (lisp-implementation-version)
       #+clisp (subseq (lisp-implementation-version)

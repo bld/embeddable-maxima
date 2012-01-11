@@ -143,7 +143,7 @@ When one changes, the other does too."
 
 ;; not so good way to get relative subdirectories paths for maxima "share" directory
 (defun share-subdirs-list ()
-  (let* ((basepath (namestring (merge-pathnames "share/" (asdf:component-pathname (asdf:find-system '#:maxima)))))
+  (let* ((basepath (namestring (merge-pathnames "share/" (asdf:component-pathname (asdf:find-system '#:embeddable-maxima)))))
          (basepath-len (length basepath)))
     (mapcar (lambda (path) (subseq (namestring path) basepath-len (- (length (namestring path)) 1))) (recur-list-directory basepath))))
 
@@ -153,7 +153,7 @@ When one changes, the other does too."
 
 (defun set-pathnames ()
   (setf *maxima-prefix* (or (maxima-getenv-path "MAXIMA_PREFIX")
-                            (asdf:component-pathname (asdf:find-system '#:maxima))))
+                            (asdf:component-pathname (asdf:find-system '#:embeddable-maxima))))
   (setf *maxima-userdir* (or ;;(maxima-getenv "HOME") ;; cl must do it in user-home-dir-pathname
                           (maxima-getenv-path"MAXIMA_HOME") (user-homedir-pathname)))
   (setf *maxima-tempdir* (or (maxima-getenv-path "MAXIMA_TEMPDIR") (maxima-getenv-path "TEMP") (default-tempdir)))
@@ -361,7 +361,7 @@ When one changes, the other does too."
 	   (make-cl-option :names '("--version")
 			   :action #'(lambda ()
 				       (format t "Maxima ~a~%"
-					       (asdf:component-version (asdf:find-system '#:maxima)))
+					       (asdf:component-version (asdf:find-system '#:embeddable-maxima)))
 				       ($quit))
 			   :help-string
 			   "Display the default installed version.")
