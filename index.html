@@ -1,17 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
 <html>
-<!-- Created on January, 6 2012 by texi2html 1.76 -->
-<!--
-Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
-            Karl Berry  <karl@freefriends.org>
-            Olaf Bachmann <obachman@mathematik.uni-kl.de>
-            and many others.
-Maintained by: Many creative people <dev@texi2html.cvshome.org>
-Send bugs and suggestions to <users@texi2html.cvshome.org>
-
--->
 <head>
-<title>Maxima VERSION Manual: </title>
+<title>Embeddable-maxima manual:</title>
 
 <meta name="description" content="Maxima VERSION Manual: ">
 <meta name="keywords" content="Maxima VERSION Manual: ">
@@ -28,22 +18,22 @@ Send bugs and suggestions to <users@texi2html.cvshome.org>
 <h2>Download</h2>
 
 
-<p><a href="https://github.com/filonenko-mikhail/maxima/tarball/quicklisp">Tarball</a></p>
+<p><a href="https://github.com/filonenko-mikhail/embeddable-maxima/tarball/quicklisp">Tarball</a></p>
 
 <p>or</p>
 
 <pre class="example">
-git clone https://filonenko-mikhail@github.com/filonenko-mikhail/maxima.git
+git clone https://filonenko-mikhail@github.com/filonenko-mikhail/embeddable-maxima.git
 git checkout -b quicklisp --track origin/quicklisp
 </pre>
 
 <p>or</p>
 
 <pre class="example">
-mkdir maxima.quicklisp
-cd maxima.quicklisp
+mkdir embeddable-maxima
+cd embeddable-maxima
 git init
-git remote add origin https://filonenko-mikhail@github.com/filonenko-mikhail/maxima.git
+git remote add origin https://filonenko-mikhail@github.com/filonenko-mikhail/embeddable-maxima.git
 git fetch --depth 1 origin quicklisp:refs/remotes/quicklisp
 git checkout -b quicklisp --track origin/quicklisp
 </pre>
@@ -54,7 +44,7 @@ git checkout -b quicklisp --track origin/quicklisp
 emacs
 M+x slime
   (pushnew "/path/to/maxima/" asdf:*central-registry*)
-  (ql:quickload :maxima)
+  (ql:quickload :embeddable-maxima)
   (cl-user::run)
     run_testsuite();
     quit();
