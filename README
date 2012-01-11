@@ -10,7 +10,7 @@ Usage
   emacs
   M+x slime
     (pushnew "/path/to/maxima/" asdf:*central-registry*)
-    (ql:quickload :maxima)
+    (ql:quickload :embeddable-maxima)
     (cl-user::run)
       run_testsuite();
       quit();
