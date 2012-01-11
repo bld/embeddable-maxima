@@ -4,7 +4,7 @@ embeddable-maxima is fork of Maxima CAS.
 Main goal of project: to make Maxima available in common lisp project.
 
 Download
-https://github.com/filonenko-mikhail/maxima/tarball/quicklisp
+https://github.com/filonenko-mikhail/embeddable-maxima/tarball/quicklisp
 
 Usage
   emacs
