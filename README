@@ -1,3 +1,62 @@
+* Embeddable-maxima
+
+embeddable-maxima is fork of Maxima CAS.
+
+Main goal of project: to make Maxima available in common lisp project.
+
+* Download
+
+[[https://github.com/filonenko-mikhail/maxima/tarball/quicklisp]]
+
+* Usage
+
+  emacs
+  M+x slime
+    (pushnew "/path/to/maxima/" asdf:*central-registry*)
+    (ql:quickload :maxima)
+    (cl-user::run)
+      run_testsuite();
+      quit();
+
+* Example
+
+Solving linear equations in common lisp using embeddable-maxima:
+
+System is
+
+  [2*x + y - z = 8, -3*x - y + 2*z = -11, -2*x + y + 2*z = -3]
+
+Maxima provides cl macroreader #$expr$ to expand maxima language expressions.
+
+  #$[2*x + y - z = 8, -3*x - y + 2*z = -11, -2*x + y + 2*z = -3]$
+
+  ((MLIST SIMP)
+   ((MEQUAL SIMP) ((MPLUS SIMP) ((MTIMES SIMP) 2 $X) $Y ((MTIMES SIMP) -1 $Z)) 8)
+    ((MEQUAL SIMP)
+      ((MPLUS SIMP) ((MTIMES SIMP) -3 $X) ((MTIMES SIMP) -1 $Y)
+         ((MTIMES SIMP) 2 $Z))
+           -11)
+            ((MEQUAL SIMP) ((MPLUS SIMP) ((MTIMES SIMP) -2 $X) $Y ((MTIMES SIMP) 2 $Z))
+              -3))
+
+We should use function solve. It has name $solve in cl environment.
+
+  ($solve #$[2*x + y - z = 8, -3*x - y + 2*z = -11, -2*x + y + 2*z = -3]$)
+
+    ((MLIST) ((MLIST) ((MEQUAL) $Z -1) ((MEQUAL) $Y 3) ((MEQUAL) $X 2)))
+
+
+Let's translate given AST to maxima expression (1d, 2d or latex, it depends on display2d option):
+
+  (displa '((MLIST) ((MLIST) ((MEQUAL) $Z -1) ((MEQUAL) $Y 3) ((MEQUAL) $X 2))))
+
+  [ [z = - 1, y = 3, x = 2] ]
+
+
+Email: filonenko.mikhail at gmail.com
+
+* Original Maxima readme
+
 Maxima is a symbolic computation program.  It is full featured,
 doing symbolic manipulation of polynomials, matrices, rational
 functions, integration, Todd-coxeter, graphing, bigfloats.  It has a
