@@ -20,7 +20,7 @@
 
 (in-package :maxima.system)
 
-(defsystem #:maxima
+(defsystem #:embeddable-maxima
   :description "Maxima is a symbolic computation program." 
   :licence "GPL" 
   :version "5.26.0"
