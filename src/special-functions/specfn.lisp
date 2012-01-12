@@ -120,7 +120,7 @@
 		       (* 0.5 (log (- 1 x)) (log (/ (- 1 x) (* x x))))
 		       (- (/ (cl:expt (float pi) 2) 6))))
 		   ((< x 1)
-		    (slatec:dspenc x))
+		    (em-slatec:dspenc x))
 		   ((= x 1)
 		    (/ (cl:expt (float pi) 2) 6))
 		   (t

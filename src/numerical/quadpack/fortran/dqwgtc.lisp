@@ -14,7 +14,7 @@
 ;;;           (:array-slicing t) (:declare-common nil)
 ;;;           (:float-format double-float))
 
-(in-package "QUADPACK")
+(in-package "EM-QUADPACK")
 
 
 (defun dqwgtc (x c p2 p3 p4 kp)

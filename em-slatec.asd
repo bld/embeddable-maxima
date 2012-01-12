@@ -4,10 +4,10 @@
   (asdf:load-system :f2cl))
 
 
-(defpackage slatec.system
+(defpackage em-slatec.system
   (:use #:cl #:asdf))
 
-(in-package #:slatec.system)
+(in-package #:em-slatec.system)
 
 (defclass slatec-fortran-file (cl-source-file)
   ()
@@ -16,7 +16,7 @@
 (defun fortran-compile (op c &key
 			       (array-slicing nil)
 			       (array-type :array)
-			       (package "SLATEC")
+			       (package "EM-SLATEC")
 			       declare-common
 			       (common-as-array t))
   (let ((file (component-pathname c)))
@@ -31,21 +31,21 @@
 		       )))
 
 (defmethod perform ((op compile-op) (c slatec-fortran-file))
-  (fortran-compile op c :array-slicing nil :package "SLATEC"))
+  (fortran-compile op c :array-slicing nil :package "EM-SLATEC"))
 
 (defmethod perform ((op load-op) (c slatec-fortran-file))
   (load (first (input-files op c))))
 
-(defsystem "slatec-package"
+(defsystem em-slatec-package
   :description "Package definition for SLATEC"
   :pathname "src/numerical/slatec/"
   :components
   ((:file "package")))
 
-(defsystem slatec
+(defsystem em-slatec
   :description "SLATEC Common Mathematical Library"
   :pathname "src/numerical/slatec/"
-  :depends-on ("slatec-package" "quadpack")
+  :depends-on ("em-slatec-package" "em-quadpack")
   :components
   ((:module xermsg
     :default-component-class slatec-fortran-file

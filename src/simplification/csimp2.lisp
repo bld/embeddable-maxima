@@ -556,11 +556,11 @@
 	      (* a (sin (* (float pi) a)))
 	      (gammafloat (- a))))
 	  ((< a 10)
-	   (slatec::dgamma a))
+	   (em-slatec::dgamma a))
 	  (t
 	   (let ((result
 		  (let ((c (* (sqrt (* 2 (float pi)))
-			      (exp (slatec::d9lgmc a)))))
+			      (exp (em-slatec::d9lgmc a)))))
 		    (let ((v (expt a (- (* .5e0 a) 0.25e0))))
 		      (* v
 			 (/ v (exp a))
@@ -591,10 +591,10 @@
 
 
 ;(defmfun erf (y)
-;  (slatec:derf (float y)))
+;  (em-slatec:derf (float y)))
 
 ;(defmfun erfc (y)
-;  (slatec:derfc (float y)))
+;  (em-slatec:derfc (float y)))
 
 (defmfun $zeromatrix (m n) ($ematrix m n 0 1 1))
 

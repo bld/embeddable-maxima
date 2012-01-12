@@ -25,7 +25,7 @@
   :licence "GPL" 
   :version "5.26.0"
   :serial t
-  :depends-on (#:cl-fad #:f2cl #:slatec #:quadpack #:getopt #:trivial-features)
+  :depends-on (#:cl-fad #:f2cl #:em-slatec #:em-quadpack #:getopt #:trivial-features)
   :components ((:module src
                 :serial t
                 :components 

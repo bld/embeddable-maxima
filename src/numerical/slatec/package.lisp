@@ -1,5 +1,5 @@
 
-(defpackage :slatec
+(defpackage #:em-slatec
   (:use :common-lisp)
   (:export
    ;; Error functions

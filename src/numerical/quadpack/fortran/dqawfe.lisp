@@ -14,7 +14,7 @@
 ;;;           (:array-slicing nil) (:declare-common nil)
 ;;;           (:float-format double-float))
 
-(in-package "QUADPACK")
+(in-package "EM-QUADPACK")
 
 
 (let ((p 0.9) (pi$ 3.141592653589793))

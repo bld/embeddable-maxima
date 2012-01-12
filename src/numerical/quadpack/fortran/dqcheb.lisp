@@ -14,7 +14,7 @@
 ;;;           (:array-slicing t) (:declare-common nil)
 ;;;           (:float-format double-float))
 
-(in-package "QUADPACK")
+(in-package "EM-QUADPACK")
 
 
 (defun dqcheb (x fval cheb12 cheb24)

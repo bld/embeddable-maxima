@@ -1,5 +1,5 @@
 ;; Package for the quadpack routines.
-(defpackage quadpack
+(defpackage em-quadpack
   (:use #:cl)
   (:export
    ;; Support

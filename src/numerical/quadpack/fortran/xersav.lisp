@@ -14,7 +14,7 @@
 ;;;           (:array-slicing t) (:declare-common nil)
 ;;;           (:float-format double-float))
 
-(in-package "QUADPACK")
+(in-package "EM-QUADPACK")
 
 
 (let ((mestab (f2cl-lib:f2cl-init-string (10) (20) nil))

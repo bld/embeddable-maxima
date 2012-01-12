@@ -14,7 +14,7 @@
 ;;;           (:array-slicing t) (:declare-common nil)
 ;;;           (:float-format double-float))
 
-(in-package "QUADPACK")
+(in-package "EM-QUADPACK")
 
 
 (defun xerrwv (messg nmessg nerr level ni i1 i2 nr r1 r2)

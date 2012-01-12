@@ -1972,6 +1972,6 @@
 ;; negative x.
 (defun $expint (x)
   (cond ((numberp x)
-	 (values (slatec:de1 (float x))))
+	 (values (em-slatec:de1 (float x))))
 	(t
 	 (list '($expint simp) x))))

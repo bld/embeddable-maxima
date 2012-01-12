@@ -28,7 +28,7 @@
     (handler-case
 	(multiple-value-bind (junk z-a z-b z-epsabs z-epsrel z-key result abserr neval ier
 				   z-limit z-lenw last)
-	    (quadpack:dqag #'(lambda (x)
+	    (em-quadpack:dqag #'(lambda (x)
 			     (float (funcall f x)))
 			 (float-or-lose a)
 			 (float-or-lose b)
@@ -57,7 +57,7 @@
     (handler-case
 	(multiple-value-bind (junk z-a z-b z-epsabs z-epsrel result abserr neval ier
 				   z-limit z-lenw last)
-	    (quadpack:dqags #'(lambda (x)
+	    (em-quadpack:dqags #'(lambda (x)
 			      (float (funcall f x)))
 			  (float-or-lose a)
 			  (float-or-lose b)
@@ -121,7 +121,7 @@
 	    (multiple-value-bind (junk z-bound z-inf z-epsabs z-epsrel
 				       result abserr neval ier
 				       z-limit z-lenw last)
-		(quadpack:dqagi #'(lambda (x)
+		(em-quadpack:dqagi #'(lambda (x)
 				  (float (funcall f x)))
 			      (float-or-lose bound)
 			      infinity
@@ -150,7 +150,7 @@
     (handler-case
 	(multiple-value-bind (junk z-a z-b z-c z-epsabs z-epsrel result abserr neval ier
 				   z-limit z-lenw last)
-	    (quadpack:dqawc #'(lambda (x)
+	    (em-quadpack:dqawc #'(lambda (x)
 			      (float (funcall f x)))
 			  (float-or-lose a)
 			  (float-or-lose b)
@@ -185,7 +185,7 @@
 				   epsabs result abserr neval ier
 				   z-limlst z-lst
 				   z-leniw z-maxp1 z-lenw)
-	    (quadpack:dqawf #'(lambda (x)
+	    (em-quadpack:dqawf #'(lambda (x)
 			      (float (funcall f x)))
 			  (float-or-lose a)
 			  (float-or-lose omega)
@@ -221,7 +221,7 @@
 	(multiple-value-bind (junk z-a z-b z-omega z-integr z-epsabs z-epsrel
 				   result abserr neval ier
 				   z-leniw z-maxp1 z-lenw z-lst)
-	    (quadpack:dqawo #'(lambda (x)
+	    (em-quadpack:dqawo #'(lambda (x)
 			      (float (funcall f x)))
 			  (float-or-lose a)
 			  (float-or-lose b)
@@ -254,7 +254,7 @@
 	(multiple-value-bind (junk z-a z-b z-alfa z-beta z-int z-epsabs z-epsrel
 				   result abserr neval ier
 				   z-limit z-lenw last)
-	    (quadpack:dqaws #'(lambda (x)
+	    (em-quadpack:dqaws #'(lambda (x)
 			      (float (funcall f x)))
 			  (float-or-lose a)
 			  (float-or-lose b)
@@ -289,7 +289,7 @@
 	(multiple-value-bind (junk z-a z-b z-npts z-points z-epsabs z-epsrel
 				   result abserr neval ier
 				   z-leniw z-lenw last)
-	    (quadpack:dqagp #'(lambda (x)
+	    (em-quadpack:dqagp #'(lambda (x)
 			      (float (funcall f x)))
 			  (float-or-lose a)
 			  (float-or-lose b)
@@ -325,7 +325,7 @@
 
 (defun quad-control (parameter &optional new-value)
   (values
-   (quadpack:j4save (case parameter
+   (em-quadpack:j4save (case parameter
 		    ($current_error 1)
 		    ($control 2)
 		    ($max_message 4)

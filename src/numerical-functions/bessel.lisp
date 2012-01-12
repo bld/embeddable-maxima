@@ -281,9 +281,9 @@
      (let ((arg (realpart arg)))
        (cond
          ((= order 0)
-          (slatec:dbesj0 (float arg)))
+          (em-slatec:dbesj0 (float arg)))
          ((= order 1)
-          (slatec:dbesj1 (float arg)))
+          (em-slatec:dbesj1 (float arg)))
          ((minusp order)
           (cond ((zerop (nth-value 1 (truncate order)))
                  ;; The order is a negative integer.
@@ -312,7 +312,7 @@
           ;; for this case we can call the function dbesj
           (multiple-value-bind (n alpha) (floor (float order))
             (let ((jvals (make-array (1+ n) :element-type 'flonum)))
-              (slatec:dbesj (abs (float arg)) alpha (1+ n) jvals 0)
+              (em-slatec:dbesj (abs (float arg)) alpha (1+ n) jvals 0)
               (cond ((>= arg 0) 
                      (aref jvals n))
                     (t
@@ -351,7 +351,7 @@
                     (cyi (make-array (1+ n) :element-type 'flonum)))
                 (multiple-value-bind (v-zr v-zi v-fnu v-kode v-n
                                            v-cyr v-cyi v-nz v-ierr)
-                   (slatec:zbesj (float (realpart arg))
+                   (em-slatec:zbesj (float (realpart arg))
                                  (float (imagpart arg))
                                  alpha 1 (1+ n) cyr cyi 0 0)
                   (declare (ignore v-zr v-zi v-fnu v-kode v-n v-cyr v-cyi v-nz))
@@ -622,22 +622,22 @@
        (cond 
          ((zerop order)
           (cond ((>= arg 0)
-                 (slatec:dbesy0 (float arg)))
+                 (em-slatec:dbesy0 (float arg)))
                 (t
                  ;; For v = 0, this simplifies to
                  ;; %y[0](-z) = %y[0](z) + 2*%i*%j[0](z)
                  ;; the return value has to be a CL number
-                 (+ (slatec:dbesy0 (float (- arg)))
-                    (complex 0 (* 2 (slatec:dbesj0 (float (- arg)))))))))
+                 (+ (em-slatec:dbesy0 (float (- arg)))
+                    (complex 0 (* 2 (em-slatec:dbesj0 (float (- arg)))))))))
          ((= order 1)
           (cond ((>= arg 0)
-                 (slatec:dbesy1 (float arg)))
+                 (em-slatec:dbesy1 (float arg)))
                 (t
                  ;; For v = 1, this simplifies to
                  ;; %y[1](-z) = -%y[1](z) - 2*%i*%j[1](v)
                  ;; the return value has to be a CL number
-                 (+ (- (slatec:dbesy1 (float (- arg))))
-                    (complex 0 (* -2 (slatec:dbesj1 (float (- arg)))))))))
+                 (+ (- (em-slatec:dbesy1 (float (- arg))))
+                    (complex 0 (* -2 (em-slatec:dbesj1 (float (- arg)))))))))
          ((minusp order)
           (cond ((zerop (nth-value 1 (truncate order)))
                  ;; Order is a negative integeger or float representation.
@@ -667,7 +667,7 @@
           (multiple-value-bind (n alpha) (floor (float order))
             (let ((jvals (make-array (1+ n) :element-type 'flonum)))
               ;; First we do the calculation for an positive argument.
-              (slatec:dbesy (abs (float arg)) alpha (1+ n) jvals)
+              (em-slatec:dbesy (abs (float arg)) alpha (1+ n) jvals)
               
               ;; Now we look at the sign of the argument
               (cond ((>= arg 0)                
@@ -706,7 +706,7 @@
                     (cwrki (make-array (1+ n) :element-type 'flonum)))
                 (multiple-value-bind (v-zr v-zi v-fnu v-kode v-n v-cyr v-cyi 
                                            v-nz v-cwrkr v-cwrki v-ierr)
-                   (slatec::zbesy (float (realpart arg))
+                   (em-slatec::zbesy (float (realpart arg))
                                   (float (imagpart arg))
                                   alpha 1 (1+ n) cyr cyi 0 cwrkr cwrki 0)
                   (declare (ignore v-zr v-zi v-fnu v-kode v-n
@@ -932,9 +932,9 @@
      (let ((arg (realpart arg)))
        (cond 
          ((zerop order)
-          (slatec:dbesi0 (float arg)))
+          (em-slatec:dbesi0 (float arg)))
          ((= order 1)
-          (slatec:dbesi1 (float arg)))
+          (em-slatec:dbesi1 (float arg)))
          ((or (minusp order) (< arg 0))
           (multiple-value-bind (order-int order-frac) (floor order)
             (cond ((zerop order-frac)
@@ -972,7 +972,7 @@
           ;; Now the case order > 0 and arg >= 0
           (multiple-value-bind (n alpha) (floor (float order))
             (let ((jvals (make-array (1+ n) :element-type 'flonum)))
-              (slatec:dbesi (float (realpart arg)) alpha 1 (1+ n) jvals 0)
+              (em-slatec:dbesi (float (realpart arg)) alpha 1 (1+ n) jvals 0)
               (aref jvals n)))))))
     (t
      ;; The arg is complex.  Use the complex-valued Bessel function.
@@ -982,7 +982,7 @@
              (cyi (make-array (1+ n) :element-type 'flonum)))
          (multiple-value-bind (v-zr v-zi v-fnu v-kode v-n
                                     v-cyr v-cyi v-nz v-ierr)
-            (slatec::zbesi (float (realpart arg))
+            (em-slatec::zbesi (float (realpart arg))
                            (float (imagpart arg))
                            alpha 1 (1+ n) cyr cyi 0 0)
            (declare (ignore v-zr v-zi v-fnu v-kode v-n v-cyr v-cyi v-nz))
@@ -1271,15 +1271,15 @@
                   ;; in all other cases general complex result
                   (t result))))
          ((= order 0)
-          (slatec:dbesk0 (float arg)))
+          (em-slatec:dbesk0 (float arg)))
          ((= order 1)
-          (slatec:dbesk1 (float arg)))
+          (em-slatec:dbesk1 (float arg)))
          (t
           ;; From A&S 9.6.6, K(-v,z) = K(v,z), so take the
           ;; absolute value of the order.
           (multiple-value-bind (n alpha) (floor (abs (float order)))
             (let ((jvals (make-array (1+ n) :element-type 'flonum)))
-              (slatec:dbesk (float arg) alpha 1 (1+ n) jvals 0)
+              (em-slatec:dbesk (float arg) alpha 1 (1+ n) jvals 0)
               (aref jvals n)))))))
     (t
      ;; The arg is complex.  Use the complex-valued Bessel function. From 
@@ -1289,7 +1289,7 @@
              (cyi (make-array (1+ n) :element-type 'flonum)))
          (multiple-value-bind (v-zr v-zi v-fnu v-kode v-n
                                     v-cyr v-cyi v-nz v-ierr)
-            (slatec::zbesk (float (realpart arg))
+            (em-slatec::zbesk (float (realpart arg))
                            (float (imagpart arg))
                            alpha 1 (1+ n) cyr cyi 0 0)
            (declare (ignore v-zr v-zi v-fnu v-kode v-n v-cyr v-cyi v-nz))
@@ -1606,7 +1606,7 @@
 (defun $scaled_bessel_i0 ($x)
   (cond ((mnump $x)
 	 ;; XXX Should we return noun forms if $x is rational?
-	 (slatec:dbsi0e ($float $x)))
+	 (em-slatec:dbsi0e ($float $x)))
 	(t
 	 (mul (power '$%e (neg (simplifya `((mabs) ,$x) nil)))
 	      `((%bessel_i) 0 ,$x)))))
@@ -1614,7 +1614,7 @@
 (defun $scaled_bessel_i1 ($x)
   (cond ((mnump $x)
 	 ;; XXX Should we return noun forms if $x is rational?
-	 (slatec:dbsi1e ($float $x)))
+	 (em-slatec:dbsi1e ($float $x)))
 	(t
 	 (mul (power '$%e (neg (simplifya `((mabs) ,$x) nil)))
 	      `((%bessel_i) 1 ,$x)))))
@@ -1624,7 +1624,7 @@
 	 ;; XXX Should we return noun forms if $n and $x are rational?
 	 (multiple-value-bind (n alpha) (floor ($float $n))
 	   (let ((iarray (make-array (1+ n) :element-type 'flonum)))
-	   (slatec:dbesi ($float $x) alpha 2 (1+ n) iarray 0)
+	   (em-slatec:dbesi ($float $x) alpha 2 (1+ n) iarray 0)
 	   (aref iarray n))))
 	(t
 	 (mul (power '$%e (neg (simplifya `((mabs) ,$x) nil)))
@@ -1713,7 +1713,7 @@
 	           (cyr (make-array (1+ n) :element-type 'flonum))
 	           (cyi (make-array (1+ n) :element-type 'flonum)))
 	       (multiple-value-bind (dzr dzi df dk dm dn dcyr dcyi nz ierr)
-	          (slatec::zbesh zr zi fnu 1 1 (1+ n) cyr cyi 0 0)
+	          (em-slatec::zbesh zr zi fnu 1 1 (1+ n) cyr cyi 0 0)
 	         (declare (ignore dzr dzi df dk dm dn dcyr dcyi nz ierr))
 	         (complex (aref cyr n) (aref cyi n)))))))))
 
@@ -1800,7 +1800,7 @@
 	           (cyr (make-array (1+ n) :element-type 'flonum))
 	           (cyi (make-array (1+ n) :element-type 'flonum)))
 	       (multiple-value-bind (dzr dzi df dk dm dn dcyr dcyi nz ierr)
-	          (slatec::zbesh zr zi fnu 1 2 (1+ n) cyr cyi 0 0)
+	          (em-slatec::zbesh zr zi fnu 1 2 (1+ n) cyr cyi 0 0)
 	         (declare (ignore dzr dzi df dk dm dn dcyr dcyi nz ierr))
 	         (complex (aref cyr n) (aref cyi n)))))))))
 

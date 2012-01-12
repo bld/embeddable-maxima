@@ -1795,7 +1795,7 @@
 
 (defun erf (z)
   ;; We use the slatec routine for float values.
-  (slatec:derf (float z)))
+  (em-slatec:derf (float z)))
 
 ;;; This would be the code when using gamma-incomplete.
 ;  (realpart
