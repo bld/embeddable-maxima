@@ -359,10 +359,17 @@
   (format t (intl:gettext "Submit bug reports by following the 'Add new' link on that page.~%"))
   (format t (intl:gettext "Please include the following information with your bug report:~%"))
   (format t "-------------------------------------------------------------~%")
-  ($build_info)
+  (displa ($build_info))
   (format t "-------------------------------------------------------------~%")
   (format t (intl:gettext "The above information is also reported by the function 'build_info'.~%~%"))
   "")
+
+;; Declare a build_info structure, then remove it from the list of user-defined structures.
+(defstruct1 '((%build_info) $version $timestamp $host $lisp_name $lisp_version))
+(let nil (declare (special $structures))
+  (setq $structures (cons '(mlist) (remove-if #'(lambda (x) (eq (caar x) '%build_info)) (cdr $structures)))))
+
+(defvar *maxima-build-info* nil)
 
 (defmfun $build_info ()
   (format t (intl:gettext "~%Maxima version: ~a~%") (asdf:component-version (asdf:find-system '#:embeddable-maxima)))
@@ -376,6 +383,35 @@
   (format t (intl:gettext "Lisp implementation type: ~a~%") (lisp-implementation-type))
   (format t (intl:gettext "Lisp implementation version: ~a~%~%") (lisp-implementation-version))
   "")
+
+(defun dimension-build-info (form result)
+  (declare (special bkptht bkptdp lines break))
+  ;; Usually the result of (MFUNCALL '$@ ...) is a string,
+  ;; but ensure that output makes sense even if it is not.
+  (let
+    ((version-string (format nil (intl:gettext "Maxima version: ~a")
+       (coerce (mstring (mfuncall '$@ form '$version)) 'string)))
+     (timestamp-string (format nil (intl:gettext "Maxima build date: ~a")
+       (coerce (mstring (mfuncall '$@ form '$timestamp)) 'string)))
+     (host-string (format nil (intl:gettext "Host type: ~a")
+       (coerce (mstring (mfuncall '$@ form '$host)) 'string)))
+     (lisp-name-string (format nil (intl:gettext "Lisp implementation type: ~a")
+       (coerce (mstring (mfuncall '$@ form '$lisp_name)) 'string)))
+     (lisp-version-string (format nil (intl:gettext "Lisp implementation version: ~a")
+       (coerce (mstring (mfuncall '$@ form '$lisp_version)) 'string)))
+     (bkptht 1)
+     (bkptdp 1)
+     (lines 0)
+     (break 0))
+    (forcebreak result 0)
+    (forcebreak (reverse (coerce version-string 'list)) 0)
+    (forcebreak (reverse (coerce timestamp-string 'list)) 0)
+    (forcebreak (reverse (coerce host-string 'list)) 0)
+    (forcebreak (reverse (coerce lisp-name-string 'list)) 0)
+    (forcebreak (reverse (coerce lisp-version-string 'list)) 0))
+  nil)
+
+(setf (get '%build_info 'dimension) 'dimension-build-info)
 
 (defvar *maxima-started* nil)
 
