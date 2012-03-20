@@ -482,6 +482,7 @@ When one changes, the other does too."
 ;;; into *builtin-symbol-props* would cause a hang.  Therefore
 ;;; the properties are copied into *builtin-symbol-props* before
 ;;; initializing the assume database.
+
 (let ((maxima-package (find-package :maxima)))
   (do-symbols (s maxima-package)
     (when (and (eql (symbol-package s) maxima-package)
@@ -490,6 +491,7 @@ When one changes, the other does too."
       (push s *builtin-symbols*)
       (setf (gethash s *builtin-symbol-props*)
 	    (copy-tree (symbol-plist s))))))
+
 
 ;; Initialize assume database for $%pi, $%e, etc
 (dolist (c *builtin-numeric-constants*)

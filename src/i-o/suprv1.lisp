@@ -143,6 +143,7 @@
       (setq $labels (cons (car $labels) (cons linelable (cdr $labels))))))
   linelable)
 
+
 (defmfun printlabel ()
   (mtell-open "(~A) " (subseq (print-invert-case linelable) 1)))
 
@@ -176,6 +177,7 @@
   (not (or $nolabels
 	   (= $linenum 0)
 	   (boundp ($concat '|| x $linenum)))))
+
 
 (defun gctimep (timep tim)
   (cond ((and (eq timep '$all) (not (zerop tim))) (princ (intl:gettext "Total time = ")) t)

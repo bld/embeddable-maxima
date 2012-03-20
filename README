@@ -15,6 +15,17 @@ Usage
       run_testsuite();
       quit();
 
+Tested:
+SBCL 1.0.54 x86_64 linux (all tests passed),
+SBCL 1.0.53.74.mswinmt.1092-207a13d x86_64 windows 7 (almost tests passed (2 failed))
+
+Armed Bear Common Lisp 1.1.0-dev-svn-13875
+Java 1.6.0_24 Sun Microsystems Inc.
+OpenJDK 64-Bit Server VM
+(loadable, many tests failed)
+
+
+
 Documentation
 http://filonenko-mikhail.github.com/embeddable-maxima/
 
