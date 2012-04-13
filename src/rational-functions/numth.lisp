@@ -209,6 +209,12 @@
 ;; zn_order, zn_primroot_p, zn_primroot, zn_log, chinese
 ;;
 ;; 2012, Volker van Nek  
+;;
+
+;; Maxima option variables:
+(defmvar $zn_primroot_limit 1000 "Upper bound for `zn_primroot'." fixnum)
+(defmvar $zn_primroot_verbose nil "Print message when `zn_primroot_limit' is reached." boolean)
+(defmvar $zn_primroot_pretest nil "`zn_primroot' performs pretest if (Z/nZ)* is cyclic." boolean)
 
 
 ;; compute the order of x in (Z/nZ)*
@@ -343,6 +349,9 @@
     ((<= n 1) nil)
     ((= n 2) 1)
     (t 
+      (when $zn_primroot_pretest
+        (unless (cyclic-p n)
+          (return-from $zn_primroot nil) ))
       (if fs-phi
          (if (and ($listp fs-phi) ($listp (cadr fs-phi)))
            (progn 
@@ -355,11 +364,38 @@
                    (car fs-phi) ;; phi
                    (mapcar #'car (cdr fs-phi))) ))) ;; factors only (omitting multiplicity)
 ;;
+;; (Z/nZ)* is cyclic if n = 2, 4, p^k or 2*p^k where p prime > 2
+(defun cyclic-p (n) 
+  (cond
+    ((< n 2) nil)
+    ((< n 8) t)
+    (t 
+      (when (evenp n) 
+        (setq n (ash n -1))
+        (when (evenp n) (return-from cyclic-p nil)) )
+      (let (($intfaclim) (fs (get-small-factors n)) (len 0) p q)
+        (setq n (car fs))
+        (when (cadr fs) (setq len (length (cadr fs))))
+        (if (= 1 n) 
+          (return-from cyclic-p (= 1 len))
+          (when (> len 0) (return-from cyclic-p nil)) )
+        (when (primep n) (return-from cyclic-p t))
+        (setq q (setq p (get-one-factor n)))
+        (do () (())
+          (setq n (/ n q))
+          (when (primep n) (return (= n p)))
+          (setq q (get-one-factor n))
+          (when (/= p q) (return nil)) )))))
+;;
 (defun zn-primroot (n phi fs-phi) 
   (do ((i 2 (1+ i)))
        ((= i n) nil)
     (when (zn-primroot-p i n phi fs-phi)
-      (return i)) ))
+      (return i) )
+    (when (= i $zn_primroot_limit)
+      (when $zn_primroot_verbose
+        (format t "`zn_primroot' stopped at zn_primroot_limit = ~A~%" $zn_primroot_limit) )
+      (return nil) )))
 
 ;;
 ;; Chinese Remainder Theorem
@@ -432,7 +468,7 @@
                (car fs-phi) ;; phi
                (cdr fs-phi)) ))) ;; factors with multiplicity
 ;;
-;; Pohlig and Hellmann reduction:
+;; Pohlig and Hellman reduction:
 (defun zn-dlog (a g n phi fs-phi)
   (let (p e phip gp x dlog (dlogs nil))
     (dolist (f fs-phi)
