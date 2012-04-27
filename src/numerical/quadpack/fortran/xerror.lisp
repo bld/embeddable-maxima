@@ -7,7 +7,7 @@
 ;;;  "f2cl6.l,v 1d5cbacbb977 2008/08/24 00:56:27 rtoy $"
 ;;;  "macros.l,v fceac530ef0c 2011/11/26 04:02:26 toy $")
 
-;;; Using Lisp SBCL 1.0.55
+;;; Using Lisp SBCL 1.0.56
 ;;; 
 ;;; Options: ((:prune-labels nil) (:auto-save t) (:relaxed-array-decls t)
 ;;;           (:coerce-assigns :as-needed) (:array-type ':array)
